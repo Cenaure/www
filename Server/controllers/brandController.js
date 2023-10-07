@@ -6,12 +6,12 @@ class BrandController {
         const { name } = req.body;
 
         if (!name) {
-            throw new ApiError(400, 'Name is required');
+            throw new ApiError(400, 'Ім\'я обов\'язкове');
         }
 
         const existingBrand = await Brand.findOne({ name });
         if (existingBrand) {
-            throw new ApiError(400, 'Brand with the same name already exists');
+            throw new ApiError(400, 'Бренд з такою назвою вже існує');
         }
         
         const brand = await Brand.create({ name });

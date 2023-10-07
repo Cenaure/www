@@ -6,7 +6,7 @@ const tokenService = require('./tokenService')
 const UserDto = require('../dtos/userDto');
 const { activate } = require('../controllers/userController');
 const ApiError = require('../error/api-error');
-const Basket = require('../models/basket-model')
+const Basket = require('../models/cart-model')
 
 class UserService {
     async registration(firstName, secondName, email, password, role) {
@@ -21,7 +21,7 @@ class UserService {
         const basket = await Basket.create({userId: user.id})
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`);
 
-        const userDto = new UserDto(user); //fstname sndname email isactivated
+        const userDto = new UserDto(user); 
         const tokens = tokenService.generateTokens({...userDto});
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
