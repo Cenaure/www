@@ -13,12 +13,22 @@ class DeviceController {
             if (existingDevice) {
                 next(ApiError.badRequest(error.message));
             }
+
+            let characteristics = [];
+            for (let characteristic of req.body.characteristics) {
+                const char = await Characteristic.create({name: characteristic.name, value: characteristic.value, typeId});
+                characteristics.push(char._id);
+            }
     
-            const { img } = req.files;
-            let fileName = uuid.v4() + ".jpg";
-            img.mv(path.resolve(__dirname, '..', 'static', fileName));
-    
-            const device = await Device.create({ name, price, brandId, typeId, img: fileName });
+            let fileNames = [];
+            for (let file of req.files.imgs) {
+                let fileName = uuid.v4() + ".jpg";
+                file.mv(path.resolve(__dirname, '..', 'static', fileName));
+                fileNames.push(fileName);
+            }
+
+            const device = await Device.create({ name, price, brandId, typeId, imgs: fileNames, characteristics });
+
     
             if (info) {
                 info = JSON.parse(info)
