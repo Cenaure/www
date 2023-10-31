@@ -5,6 +5,7 @@ import userStore from './store/userStore';
 import deviceStore from './store/deviceStore';
 import brandStore from './store/brandStore';
 import typeStore from './store/typeStore';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Context = createContext(null);
 

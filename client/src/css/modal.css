@@ -1,0 +1,44 @@
+.modal {
+    background-color: rgba(2, 4, 15, 0.137);
+    color: white;
+    font-family: "JetBrains Mono",monospace;
+    border: none !important;
+}
+
+.modal-content{
+    --bs-modal-bg: rgb(25, 24, 27);
+} 
+
+.modal-header{
+    border: none !important;
+}
+
+.modal-footer{
+    border: none !important;
+}
+
+.btn-close{
+    --bs-btn-close-bg: url("./imgs/close-button.png") !important;
+    box-shadow: none !important;
+}
+
+input{
+    background-color: rgb(25, 24, 27) !important;
+    color: white;
+    box-shadow: none !important;
+    user-select: none;
+    border-color: rgb(36, 37, 43) !important;
+}
+input:focus{
+    border-color: rgb(69, 56, 77) !important;
+}
+
+.modal-dialog {
+  transform: scale(0.1);
+  transition: transform 0.5s ease-in-out;
+}
+
+.modal-dialog.modal-dialog-expand {
+  transform: scale(1);
+}
+  

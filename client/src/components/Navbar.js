@@ -21,7 +21,7 @@ const Navbar = observer(() => {
               <a class="nav-link active" aria-current="page" href="/">Головна</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Товари</a>
+              <a class="nav-link" href="/">Категорії</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/">Про нас</a>
@@ -34,8 +34,8 @@ const Navbar = observer(() => {
                 <button class="button" onClick={() => navigate('/admin')}>Керування сайтом</button>
                 <button class="button" onClick={() => navigate('/acount')}>Акаунт</button></>)
                 : ( <>
-                <button class="button" onClick={() => user.setIsAuth(true)}>Авторизація</button>
-                <button class="button" onClick={() => navigate('/registration')}>Реєстрація</button></>)
+                <button class="button" data-bs-toggle="modal" data-bs-target="#authModal">Авторизація</button>
+                <button class="button" data-bs-toggle="modal" data-bs-target="#registrationModal">Реєстрація</button></>)
               }
             </li>
           </ul>
