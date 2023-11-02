@@ -1,0 +1,7 @@
+.slider{
+  z-index: 0;
+  margin: 0;
+}
+.carousel-inner {
+  border-radius: 15px !important;
+}

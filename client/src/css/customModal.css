@@ -1,0 +1,62 @@
+.customModal {
+  width: clamp(50%, 600px, 100%);
+  height: clamp(70vh, auto, 100vh);
+  margin: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(26, 27, 31);
+  color: white;
+  font-family: "JetBrains Mono",monospace;
+  border-radius: clamp(5px, 1vw, 15px);;
+  user-select: none;
+  z-index: 2;
+}
+
+@media (max-width: 500px) {
+  .customModal{
+    height: clamp(50vh, 100%, 100vh);
+    border-radius: 0;
+    padding: 15px;
+  }
+  .modal-footer{
+    margin-top: 3rem;
+  }
+  .modal-footer > button{
+    margin-top: 20px;
+  }
+}
+
+.btn-close{
+  --bs-btn-close-bg: url("./imgs/close-button.png") !important;
+  box-shadow: none !important;
+}
+
+.modal-header{
+  margin-bottom: 5rem
+}
+.modal-footer{
+  margin: 3rem 0 1rem 1rem !important;
+}
+.modal-footer > button{
+  margin-left: 1rem;
+}
+
+input{
+  box-shadow: none !important;
+  user-select: none;
+}
+
+input:focus{
+  border-color: rgb(122, 79, 104) !important;
+}
+
+.right{
+  text-align: end;
+}
+
+.link {
+  text-decoration: none !important;
+  color: rgb(228, 148, 194) !important;
+}

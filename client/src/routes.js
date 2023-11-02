@@ -1,12 +1,11 @@
 import Admin from "./pages/Admin";
-import Auth from "./pages/Auth";
 import Basket from "./pages/Basket";
 import Device from "./pages/Device";
 import Main from "./pages/Main";
 import AboutUs from "./pages/AboutUs";
 import Types from "./pages/Types";
 import Contacts from "./pages/Contacts";
-import { adminRoute, basketRoute, mainRoute, loginRoute, registrationRoute, deviceRoute, aboutUsRoute, typesRoute, contactsRoute } from "./utils/consts";
+import { adminRoute, basketRoute, mainRoute, deviceRoute, aboutUsRoute, typesRoute, contactsRoute } from "./utils/consts";
 
 export const authRoutes = [
     {
@@ -23,14 +22,6 @@ export const publicRoutes = [
     {
         path: mainRoute,
         element: Main
-    },
-    {
-        path: loginRoute,
-        element: Auth
-    },
-    {
-        path: registrationRoute,
-        element: Auth
     },
     {
         path: deviceRoute + '/:id', 

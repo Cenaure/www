@@ -1,0 +1,14 @@
+.col-md-9{
+  padding: 0 !important;
+}
+.col-md-3{
+  padding: 0 !important;
+}
+.row{
+  width: 100% !important;
+  margin: 0 !important;
+}
+.listBtn {
+  height: 5rem;
+  width: 100%;
+}

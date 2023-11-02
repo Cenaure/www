@@ -1,0 +1,9 @@
+
+
+@media (max-width: 500px) {
+  .customModal{
+    height: clamp(70vh, 100%, 100vh) !important;
+    border-radius: 0;
+    padding: 15px;
+  }
+}
