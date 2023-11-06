@@ -1,0 +1,27 @@
+.leftNav{
+  height:60vh;
+  width: 100%;
+  padding-left: clamp(2rem, 2rem, 4rem);
+  padding-right: clamp(2rem, 2rem, 4rem);
+  background-color: white;
+}
+.navBg{
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+.listBtn{
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.listBtn img{
+  width: 30%;
+}
+
+.listBtn:hover{
+  background-color: rgba(123, 199, 77, 0.7);
+}
+

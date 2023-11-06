@@ -1,12 +1,12 @@
 import React from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import Slider from "../components/Slider";
 import LeftNav from "../components/leftNavbar";
 import { useMediaPredicate } from "react-media-hook";
-import "../css/main.css"
+import "../css/pages/main.css"
 const Main = () => {
 
-  const lessThan500 = useMediaPredicate("(max-width: 500px)");
+  const lessThan500 = useMediaPredicate("(max-width: 320px)");
 
   return (
     <Row>

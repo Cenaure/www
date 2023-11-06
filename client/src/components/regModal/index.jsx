@@ -1,7 +1,7 @@
 import {motion} from "framer-motion";
 import Backdrop from "../Backdrop";
-import "../../css/customModal.css";
-import "../../css/regModal.css";
+import "../../css/components/customModal.css";
+import "../../css/components/regModal.css";
 import {useState, useEffect } from 'react';
 import dropIn from "../../utils/modalAnimation";
 import { useMediaPredicate } from "react-media-hook";

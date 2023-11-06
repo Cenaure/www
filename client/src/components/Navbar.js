@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import { Context } from '..';
-import "../css/mainNav.css";
-import "../css/button.css";
+import "../css/components/mainNav.css";
+import "../css/components/button.css";
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import AuthModal from "./authModal/index";
@@ -30,19 +30,36 @@ const Navbar = observer(() => {
   
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark mainNav">
+      <nav className="navbar navbar-expand-lg mainNav">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">Магазин</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav mainNavNav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">Головна</a>
+                <div className='dropdown-box'>
+                  <a className="nav-link" href="/">Покупцям</a>
+                  <div className='dropdown-content'>
+                    <div className='container'>
+                      <li>
+                        1
+                      </li>
+                      <li>
+                        2
+                      </li>
+                      <li>
+                        3
+                      </li>
+                      <li>
+                        4
+                      </li>
+                      <li>
+                        5
+                      </li>
+                    </div>
+                  </div>
+                </div>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">Категорії</a>
+                <a className="nav-link active" aria-current="page" href="/">Категорії</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">Про нас</a>
@@ -52,13 +69,13 @@ const Navbar = observer(() => {
               </li>
               <li>
                 {user.isAuth ? (<>
-                  <button className="button" onClick={() => navigate('/admin')}>Керування сайтом</button>
-                  <button className="button" onClick={() => navigate('/acount')}>Акаунт</button></>)
+                  <button className="button greenCol" onClick={() => navigate('/admin')}>Керування сайтом</button>
+                  <button className="button greenCol" onClick={() => navigate('/acount')}>Акаунт</button></>)
                   : ( <>
-                  <motion.button className="button"
+                  <motion.button className="button greenCol"
                     onClick={() => (authModalOpen ? authClose() : authOpen())}
                   >Авторизація</motion.button>
-                  <motion.button className="button"
+                  <motion.button className="button greenCol"
                     onClick={() => (regModalOpen ? regClose() : regOpen())}
                   >Реєстрація</motion.button></>)
                 }
