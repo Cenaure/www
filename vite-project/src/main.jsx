@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './App.jsx';
 import userStore from './store/userStore';
 import deviceStore from './store/deviceStore';
 import brandStore from './store/brandStore';
@@ -9,8 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Context = createContext(null);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Context.Provider value = {{
       user: new userStore(),
       device: new deviceStore(),
@@ -21,4 +20,4 @@ root.render(
       <App />
     </React.StrictMode>
   </Context.Provider>
-);
+)

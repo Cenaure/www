@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { observer } from 'mobx-react-lite';
 import "../css/components/leftNav.css"
-import { Context } from '..';
+import { Context } from '../main.jsx';
 import { Col, Row } from 'react-bootstrap';
 
 const LeftNav = observer(() => {

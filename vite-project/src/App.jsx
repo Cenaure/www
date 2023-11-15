@@ -4,7 +4,7 @@ import AppRouter from './components/AppRouter';
 import Navbar from './components/Navbar';
 import {Container} from 'react-bootstrap';
 import "./css/components/container.css"
-import SndNavbar from "./components/SndNavbar";
+import SndNavbar from "./components/SndNavbar.jsx";
 import { useMediaPredicate } from "react-media-hook";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         <AppRouter />
       </Container>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

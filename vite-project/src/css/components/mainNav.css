@@ -21,6 +21,7 @@
 .dropdown-box {
   position: relative;
   display: inline-block;
+  margin-right: 40px;
 }
 
 .dropdown-content {
@@ -39,5 +40,6 @@
 }
 
 .container{
-    padding: 20px !important;
+  padding: 20px !important;
+  display: grid;
 }
