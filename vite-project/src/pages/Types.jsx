@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Devices = () => {
+const Type = () => {
+    
     return (
         <div>
-            Devices
+            123
         </div>
     );
 };
 
-export default Devices;
+export default Type;

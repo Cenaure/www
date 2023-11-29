@@ -1,0 +1,22 @@
+.breadcrumb {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  list-style: none !important;
+  margin-top: 10px;
+}
+
+.breadcrumb-item {
+  display: inline-block !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">" !important;
+  padding: 0 .5rem !important;
+  color: #6c757d !important;
+}
+
+.breadcrumb-item a {
+  color: inherit !important;
+  text-decoration: none !important;
+}

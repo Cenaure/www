@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+.mynav li, a {
+  color: #edf0f1 !important;
+  text-decoration: none !important;
+}
+header{
+  background-color: rgb(24, 24, 27);
+}
+
+.topNav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+nav{
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-links{
+  list-style: none;
+  margin: 0;
+}
+
+.navbar-links li{
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.navbar-links li a{
+  transition: color 0.3s ease 0s !important;
+}
+
+.navbar-links li a:hover{
+  color: rgb(195, 243, 169) !important;
+}
+
+.myBtn{
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 0;
+  border-radius: 50px !important;
+  transition: all 0.3s ease 0s !important;
+}
+
+.myBtn:hover{
+  background-color: rgba(136, 221, 126, 0.9);
+}
+.myBtn img{
+  width: 30px;
+  height: 30px;
+}
+
+.botNav{
+  padding: 10px 0;
+}
+.navContent {
+  justify-content: center !important; 
+}
+
+.burger{
+  cursor: pointer;
+}
+.line {
+  width: 25px;
+  height: 2px;
+  border-radius: 5px;
+  margin: 6px auto;
+  background-color: white;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.line.clicked:nth-child(2){
+  opacity: 0;
+}
+.line.clicked:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+.line.clicked:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media(max-width: 700px) {
+  .menu {
+    position: fixed;
+    left: -100%;
+    top: 59px;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(24, 24, 27);
+    text-align: center;
+    flex-direction: column;
+    transition: all 0.2s;
+    z-index: 1;
+  }
+
+  .menu.visible{
+    left: 0;
+  }
+
+  .navbar-links{
+    margin-top: 3em;
+  }
+  .navbar-links li{
+    display: block;
+    margin-top: 3em;
+    font-size: 22px;
+  }
+}
+.line.unclicked{  
+  transform: rotate(0) translate(0);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+}
+.searchField{
+  position: relative;
+}
+.searchField input {
+  width: 100%;
+  height: 45px;
+  border-radius: 20px;
+  padding: 0 20px;
+  position: relative;
+  border: 2px solid rgb(112, 112, 112);
+}
+
+.searchField button{
+  border: 0;
+  border-radius: 50%;
+  position: absolute;
+  width: 41px;
+  height: 41px;
+  right: 0;
+  top: 2px;
+  background-color: rgb(255, 255, 255);
+  transition: all ease 0.2s;
+}
+
+.searchField button:hover {
+  background-color: rgba(136, 221, 126, 0.9);
+}

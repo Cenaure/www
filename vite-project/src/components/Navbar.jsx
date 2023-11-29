@@ -1,13 +1,16 @@
-import React, {useContext, useState} from 'react';
-import { Context } from '../main.jsx';
-import "../css/components/mainNav.css";
+import React, {useContext, useState, useRef, useEffect} from 'react';
+import { Context } from '../main.jsx';  
 import "../css/components/button.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 import { observer } from 'mobx-react-lite';
 import AuthModal from "./authModal/index";
 import RegModal from "./regModal/index";
 import {motion, AnimatePresence} from "framer-motion";
-import "../css/components/MyNavbar.css";
+import AcIm from '../css/imgs/Account.png'
+import "../css/components/navbar.css";
+import { Container } from 'react-bootstrap';
+import { useMediaPredicate } from "react-media-hook";
+
 
 const Navbar = observer(() => {
   const {user} = useContext(Context);
@@ -99,57 +102,62 @@ const Navbar = observer(() => {
       </AnimatePresence>
     </div>
   );*/
+  const lessThan700 = useMediaPredicate("(max-width: 700px)");
+  
+  const [burgerClass, setBurgerClass] = useState("line unclicked");
+  const [menuClass, setMenuClass] = useState("menu hidden");
+  const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+  const updateMenu = () => {
+    if(!isMenuClicked){
+      setBurgerClass("line clicked");
+      setMenuClass("menu visible");
+    }
+    else{
+      setBurgerClass("line unclicked");
+      setMenuClass("menu hidden");
+    }
+    setIsMenuClicked(!isMenuClicked);
+  }
+
   return(
     <>
-      <div className='MyNavbar'>
-        <div className='navContent'>
-          <div className='FLeft'>
-            <div className='dropdown-box navItem'>
-              <a className="nav-link" href="/">Покупцям</a>
-              <div className='dropdown-content'>
-                <div className='container'>
-                  <div>
-                    <button>
-                      1
-                    </button>
-                  </div>
-                  <div>
-                    <button>
-                      2
-                    </button>
-                  </div>
-                  <div>
-                    <button>
-                      3
-                    </button>
-                  </div>
-                  <div>
-                    <button>
-                      4
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <a className="nav-link active" aria-current="page" href="/">Категорії</a>
-            <a className="nav-link" href="/">Про нас</a>
-            <a className="nav-link" href="/contacts">Контакти</a>
+      <header className='mynav'>
+        <Container fluid>
+          <div className='topNav'>
+            <a className='navBrand' href='/'>gigix</a>
+            <nav className={menuClass}>
+              <ul className='navbar-links'>
+                <li><a href='#'>Сервіси</a></li>
+                <li><a href='#'>Сервіси</a></li>
+                <li><a href='#'>Сервіси</a></li>
+                {lessThan700 && <li>
+                  <form className='searchField'>
+                    <input type='text' placeholder='Я хочу знайти...' name='q'>
+                    </input>
+                    <button type='submit'>Ш</button>
+                  </form>
+                </li>}
+              </ul>
+            </nav>
+            <button onClick={() => (authModalOpen ? authClose() : authOpen())} className='myBtn'><img src={AcIm}/></button>
+            {lessThan700 &&
+              <div className='burger' onClick={updateMenu}>
+                <div className={burgerClass}></div>
+                <div className={burgerClass}></div>
+                <div className={burgerClass}></div>
+              </div>}
           </div>
-          <div className='FRight'>
-            {user.isAuth ? (<>
-              <button className="button greenCol" onClick={() => navigate('/admin')}>Керування сайтом</button>
-              <button className="button greenCol" onClick={() => navigate('/acount')}>Акаунт</button></>)
-              : ( <>
-              <motion.button className="button greenCol"
-                onClick={() => (authModalOpen ? authClose() : authOpen())}
-              >Авторизація</motion.button>
-              <motion.button className="button greenCol"
-                onClick={() => (regModalOpen ? regClose() : regOpen())}
-              >Реєстрація</motion.button></>)
-            }
-          </div>
-        </div>
-      </div>
+          {!lessThan700 && <div className='botNav'>
+            <form className='searchField'>
+              <input type='text' placeholder='Я хочу знайти...' name='q'>
+                
+              </input>
+              <button type='submit'>Ш</button>
+            </form>
+          </div>}
+        </Container>
+      </header>
       <AnimatePresence
         initial={false}
         onExitComplete={() => null}

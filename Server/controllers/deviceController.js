@@ -50,7 +50,7 @@ class DeviceController {
 
     async getAll(req, res, next) {
         try {
-            const { brandId, typeId, limit, page } = req.body;
+            const { brandId, typeId, limit, page } = req.query;
             let offset = (page || 1) * (limit || 9) - (limit || 9);
             let devices;
             let totalCount;
@@ -86,7 +86,7 @@ class DeviceController {
         } catch (error) {
             next(ApiError.internal(error.message));
         }
-    }
+    }   
 }
 
 module.exports = new DeviceController();
