@@ -11,7 +11,7 @@
   font-family: "JetBrains Mono",monospace;
   border-radius: clamp(5px, 1vw, 15px);;
   user-select: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 @media (max-width: 500px) {

@@ -5,6 +5,7 @@
   padding-right: clamp(2rem, 2rem, 4rem);
   background-color: white;
 }
+
 .navBg{
   height: 100%;
   width: 100%;
@@ -13,6 +14,7 @@
   position: relative;
   border-radius: 20px;
 }
+
 .listBtn{
   background-color: rgb(255, 255, 255);
   border: none;
@@ -36,14 +38,42 @@
 .backdrop-bg {
   position: absolute;
   display: inline-block;
-  margin-left: 13%;
-  width: 69%;
-  height: 60vh;
+  width: clamp(50%, 1500px, 90%);
+  height: 64vh;
   top: 125px;
   background: #ffffff;
   z-index: 2;
-  padding-left: 6%;
+  padding-left: 20%;
   border-radius: 20px;
+}
+
+.scrollContainer{
+  width: 98%;
+  height: 98%;
+  margin-top: 7px;
+  overflow: auto;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+  position: relative;
+  background-color: #fff;
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+  background: #cecece;
+  border-radius: 10px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb:hover {
+  background: #8a8a8a;
+  border-radius: 10px;
 }
 
 .shadow {
@@ -54,4 +84,35 @@
   top: 0;
   left: 0;
   background-color: #00000033;
+}
+
+.changeRow{
+  padding: 20px;
+}
+
+.nav-link {
+  color: rgb(134, 134, 134) !important;
+  font-size: 13px !important;
+  padding: 5px !important;
+}
+
+.nav a:first-child {
+  color: black !important;
+  font-size: 15px !important;
+  font-weight: 600;
+}
+
+.nav a:last-child {
+  color: black !important;
+  font-size: 12px !important;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.nav a:last-child:hover {
+  color: rgb(104, 104, 104) !important;
+}
+
+.nav a:first-child:hover {
+  color: rgb(104, 104, 104) !important;
 }

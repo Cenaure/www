@@ -100,7 +100,7 @@ nav{
     text-align: center;
     flex-direction: column;
     transition: all 0.2s;
-    z-index: 1;
+    z-index: 4;
   }
 
   .menu.visible{
