@@ -1,0 +1,6 @@
+.myDropdown{
+  position: absolute;
+  display: inline-block;
+  z-index: 2;
+  border-radius: 20px;
+}

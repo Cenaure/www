@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const router = require('./routes/index');
+const cookieParser = require('cookie-parser')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware');
 const path = require('path')
 
@@ -14,6 +15,8 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+app.use(cookieParser())
 
 // Pictures
 app.use(express.static(path.resolve(__dirname, 'static')));

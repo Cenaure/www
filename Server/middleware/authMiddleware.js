@@ -1,18 +1,26 @@
 const jwt = require('jsonwebtoken');
+const ApiError = require('../error/api-error');
+const tokenService = require('../service/tokenService');
 
 module.exports = function(req, res, next){
     if(req.method === "OPTIONS"){
         next();
     }
     try {
-        const token = req.headers.authorization.split(' ')[1];
-        if(!token){
-            return res.status(401).json({message: "Користувач не авторизован"});
-        }
-        const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
-        res.user = decoded;
+        const authorizationHeader = req.headers.authorization;
+        if(!authorizationHeader) return next(ApiError.UnauthorizedError());
+        
+
+        const accessToken = authorizationHeader.split(' ')[1];
+        if(!accessToken) return next(ApiError.UnauthorizedError());
+        
+
+        const userData = tokenService.validateAccessToken(accessToken);
+        if(!userData) return next(ApiError.UnauthorizedError());
+        
+        req.user = userData;
         next();
     } catch (error) {
-        res.status(401).json({message: "Користувач не авторизован"});
+        return next(ApiError.UnauthorizedError());
     }
 }

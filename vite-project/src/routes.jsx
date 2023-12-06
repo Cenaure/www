@@ -6,6 +6,7 @@ import AboutUs from "./pages/AboutUs";
 import Types from "./pages/Types";
 import Contacts from "./pages/Contacts";
 import { adminRoute, basketRoute, mainRoute, deviceRoute, aboutUsRoute, typesRoute, contactsRoute } from "./utils/consts";
+import PageNotFound from "./pages/PageNotFound";
 
 export const authRoutes = [
     {
@@ -21,7 +22,7 @@ export const authRoutes = [
 export const publicRoutes = [
     {
         path: mainRoute,
-        element: Main
+        element: Main,
     },
     {
         path: deviceRoute + '/:id', 

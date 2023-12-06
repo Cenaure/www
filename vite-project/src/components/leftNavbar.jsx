@@ -1,40 +1,14 @@
 import React, {useContext} from 'react';
 import { observer } from 'mobx-react-lite';
 import "../css/components/leftNav.css"
-import {useEffect, useState} from 'react';
-import axios from 'axios';
+import "../css/components/dropdown.css"
+import {useState} from 'react';
 import { Col, Row, Nav } from 'react-bootstrap';
 import {motion} from "framer-motion";
+import { useMediaPredicate } from "react-media-hook";
 
 const LeftNav = observer(() => {
-  /*
-  const [types, setTypes] = useState([]) 
-  const [devices, setDevices] = useState([]) 
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/Type')
-      .then(res => {
-        setTypes(res.data)
-      }).catch(e => {
-        console.log(e);
-      })
-  }, [])
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/device', {
-      params: {
-        typeId: "651ab83c453f0b35a575033e"
-      }
-    })
-    .then(res => {
-        setDevices(res.data)
-    }).catch(e => {
-        console.log(e);
-    })
-  }, [])*/
-
-
-
+  const lessThan768 = useMediaPredicate("(max-width: 767px)");
   const [open, setOpen] = useState(false);
   const [checker, setChecker] = useState("");
 
@@ -64,7 +38,9 @@ const LeftNav = observer(() => {
               Комп'ютери
             </button>
           </Col>
-          <Col md={{span: 12}} sm={{span: 3}} xs={{span: 6}} className='pt-1'>
+          <Col md={{span: 12}} sm={{span: 3}} xs={{span: 6}} className='pt-1'
+            onMouseEnter={() => setChecker("Периферія")} 
+          >
             <button className='listBtn'>
               Периферія
             </button>
@@ -76,13 +52,13 @@ const LeftNav = observer(() => {
           </Col>
         </Row>
       </div>
-      {open && 
+      {open && !lessThan768 && 
         <>
           <motion.div className='shadow'
             initial={{opacity:0}} animate={{opacity: 1}}
             exit={{opacity: 0}}
           ></motion.div>
-          <div className="backdrop-bg"
+          <div className="backdrop-bg myDropdown"
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
           >
@@ -204,8 +180,38 @@ const LeftNav = observer(() => {
                   </Col>  
                 </Row>
               }
+              {checker == "Периферія" && 
+                <Row className='changeRow'>
+                  <Col md={{span: 6}} xl={{span: 4}}>
+                    <Nav defaultActiveKey="/home" className="flex-column">
+                      <Nav.Link eventKey="link-1">Монітори</Nav.Link>
+                      <Nav.Link eventKey="link-2">Монітори 60-75 Гц</Nav.Link>
+                      <Nav.Link eventKey="link-3">Монітори 100-144 Гц</Nav.Link> 
+                      <Nav.Link eventKey="link-3">Монітори 165-180 Гц</Nav.Link> 
+                      <Nav.Link eventKey="link-3">Монітори більше 240 Гц</Nav.Link> 
+                      <Nav.Link eventKey="link-1">Усі монітори <span>&#62;</span></Nav.Link> 
+                    </Nav>
+                  </Col>
+                  <Col md={{span: 6}} xl={{span: 4}}>
+                    <Nav defaultActiveKey="/home" className="flex-column">
+                      <Nav.Link eventKey="link-1">Маніпулятори</Nav.Link>
+                      <Nav.Link eventKey="link-2">Комп'ютерні миші</Nav.Link>
+                      <Nav.Link eventKey="link-3">Клавіатури</Nav.Link> 
+                      <Nav.Link eventKey="link-3">Килимки для миші</Nav.Link> 
+                      <Nav.Link eventKey="link-1">Усі товари <span>&#62;</span></Nav.Link> 
+                    </Nav>
+                  </Col>
+                  <Col md={{span: 6}} xl={{span: 4}}>
+                    <Nav defaultActiveKey="/home" className="flex-column">
+                      <Nav.Link eventKey="link-1">Аудіотехніка</Nav.Link>
+                      <Nav.Link eventKey="link-2">Навушники</Nav.Link>
+                      <Nav.Link eventKey="link-3">Мікрофони</Nav.Link> 
+                      <Nav.Link eventKey="link-1">Вся аудіотехніка <span>&#62;</span></Nav.Link> 
+                    </Nav>
+                  </Col>  
+                </Row>
+              }
             </div>
-            
           </div>
         </>
       }

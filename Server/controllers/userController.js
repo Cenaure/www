@@ -8,12 +8,12 @@ class UserController{
             const {firstName, secondName, email, password} = req.body;
 
             if(!email || !password){
-                return next(ApiError.badRequest('Не вказаний email або пароль'));
+                return next(ApiError.BadRequest('Не вказаний email або пароль'));
             }
 
             const errors = validationResult(req);
             if(!errors.isEmpty()){
-                return next(ApiError.badRequest('Помилка при валідації', errors.array()));
+                return next(ApiError.BadRequest('Помилка при валідації', errors.array()));
             }
 
             const userData = await userService.registration(firstName, secondName, email, password);
@@ -86,11 +86,6 @@ class UserController{
             next(error);
         }
     } 
-
-    async check(req, res, next){
-        const token = generateJwt(req.user.id, req.user.email, req.user.role)
-        return res.json({token});
-    }
 }
 
 module.exports = new UserController();

@@ -43,10 +43,19 @@
 
 @media screen and (max-width: 768px) {
   .leftNav{
-    height: 300px;
+    height: 500px;
   }
 }
-
+@media screen and (max-width: 767px) {
+  .leftNav{
+    height: 130px;
+  }
+  .leftRow{
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    height: 110px;
+  }
+}
 .popular div img {
   width: auto;
   height: 40px;

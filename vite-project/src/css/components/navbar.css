@@ -4,9 +4,13 @@
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
 }
-.mynav li, a {
+.mynav li a {
   color: #edf0f1 !important;
   text-decoration: none !important;
+}
+.navBrand {
+  color: #edf0f1;
+  text-decoration: none;
 }
 header{
   background-color: rgb(24, 24, 27);
@@ -17,6 +21,7 @@ header{
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
+  height: 60px;
 }
 
 nav{
@@ -48,6 +53,7 @@ nav{
   border: 0;
   border-radius: 50px !important;
   transition: all 0.3s ease 0s !important;
+  position: relative;
 }
 
 .myBtn:hover{
@@ -146,4 +152,8 @@ nav{
 
 .searchField button:hover {
   background-color: rgba(136, 221, 126, 0.9);
+}
+
+.acountBtn {
+  padding: 8px 20px;
 }

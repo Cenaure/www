@@ -60,3 +60,13 @@ input:focus{
   text-decoration: none !important;
   color: rgb(228, 148, 194) !important;
 }
+
+.erText {
+  color: rgb(247, 143, 143);
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
+.erInput {
+  border-color: rgb(247, 143, 143) !important;
+}

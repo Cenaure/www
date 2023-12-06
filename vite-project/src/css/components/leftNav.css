@@ -36,15 +36,11 @@
 }
 
 .backdrop-bg {
-  position: absolute;
-  display: inline-block;
   width: clamp(50%, 1500px, 90%);
   height: 64vh;
   top: 125px;
-  background: #ffffff;
-  z-index: 2;
   padding-left: 20%;
-  border-radius: 20px;
+  background-color: #ffffff;
 }
 
 .scrollContainer{
@@ -90,7 +86,7 @@
   padding: 20px;
 }
 
-.nav-link {
+.changeRow .nav-link {
   color: rgb(134, 134, 134) !important;
   font-size: 13px !important;
   padding: 5px !important;
@@ -115,4 +111,10 @@
 
 .nav a:first-child:hover {
   color: rgb(104, 104, 104) !important;
+}
+
+@media (max-width: 767px){
+  .navBg{
+    height: 100px;
+  }
 }

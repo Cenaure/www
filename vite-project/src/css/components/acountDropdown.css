@@ -1,0 +1,14 @@
+.acountDropdown{
+  width: auto;
+  right: 0.5em;
+  height: auto;
+  top: 30px;
+  padding: 30px 0 0 10px;
+}
+.myDropdownContent{
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  padding: 30px;
+}
