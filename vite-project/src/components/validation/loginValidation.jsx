@@ -16,7 +16,7 @@ const loginValidation = (email, password, context, handleClose) => {
     errors.password = "Введіть пароль";
     invClass.password = "form-control erInput"
   } else {
-   loginPost(email, password, context, handleClose);
+    loginPost(email, password, context, handleClose);
   }
   return [errors, invClass];
 }

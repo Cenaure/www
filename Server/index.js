@@ -12,9 +12,15 @@ const { PORT, DB_URL } = process.env;
 
 const app = express();
 
+const corsOptions ={
+  origin:'http://localhost:5173', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors(corsOptions));
+app.use(express.json());  
+
 
 app.use(cookieParser())
 
