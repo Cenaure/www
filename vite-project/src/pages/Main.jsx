@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import Slider from "../components/Slider";
 import LeftNav from "../components/leftNavbar";
 import { useMediaPredicate } from "react-media-hook";
@@ -19,7 +19,8 @@ const Main = () => {
   const lessThan500 = useMediaPredicate("(max-width: 320px)");
 
   return (
-    <>
+    <Container fluid>
+   
       <noscript>
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
@@ -50,7 +51,7 @@ const Main = () => {
         <div><img src={intelMotherboardLogo}></img>Материнські плати для Intel</div>
         <div><img src={Eva02}></img>Готові збірки</div>
       </div>
-    </>
+    </Container>
   );
 };
 

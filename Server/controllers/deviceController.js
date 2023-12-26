@@ -1,5 +1,4 @@
 const Device = require('../models/device-model');
-const DeviceInfo = require('../models/deviceInfo-model');
 const ApiError = require('../error/api-error');
 const uuid = require('uuid')
 const path = require('path');
@@ -13,12 +12,6 @@ class DeviceController {
             if (existingDevice) {
                 next(ApiError.badRequest(error.message));
             }
-
-            let characteristics = [];
-            for (let characteristic of req.body.characteristics) {
-                const char = await Characteristic.create({name: characteristic.name, value: characteristic.value, typeId});
-                characteristics.push(char._id);
-            }
     
             let fileNames = [];
             for (let file of req.files.imgs) {
@@ -27,19 +20,7 @@ class DeviceController {
                 fileNames.push(fileName);
             }
 
-            const device = await Device.create({ name, price, brandId, typeId, imgs: fileNames, characteristics });
-
-    
-            if (info) {
-                info = JSON.parse(info)
-                info.forEach(i => {
-                    DeviceInfo.create({
-                        title: i.title,
-                        description: i.description,
-                        deviceId: device.id
-                    })
-                });
-            }
+            const device = await Device.create({ name, price, brandId, typeId, imgs: fileNames});
     
             return res.json(device);
         } catch (error) {

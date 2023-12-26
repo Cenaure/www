@@ -7,12 +7,16 @@ import { Context } from '../main.jsx';
 import logoutPost from './axios-components/logoutPost.jsx'
 import { useNavigate } from 'react-router-dom';
 
-const DropdownAcount = observer(() => {
+const DropdownAcount = observer(({setDropdownAcountOpen}) => {
 
   const context = useContext(Context);
+
   const navigate = useNavigate();
   const logout = () => {
-    logoutPost(context).finally(() => navigate('/'))
+    logoutPost(context, navigate).finally(() => {
+      setDropdownAcountOpen(false);
+    })
+    
   }
 
   return(

@@ -10,10 +10,12 @@ import "../css/components/navbar.css";
 import { Container } from 'react-bootstrap';
 import { useMediaPredicate } from "react-media-hook";
 import DropdownAcount from './dropdownAcount.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = observer(() => {
   const {user} = useContext(Context);
   
+  const navigate = useNavigate();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [regModalOpen, setRegModalOpen] = useState(false);
   const [dropdownAcountOpen, setDropdownAcountOpen] = useState(false);
@@ -70,10 +72,13 @@ const Navbar = observer(() => {
                 </li>}
               </ul>
             </nav>
-            {!user.isAuth ? <button onClick={() => (authModalOpen ? authClose() : authOpen())} className='myBtn'><img src={AcIm}/></button> :
-              <button className='myBtn acountBtn' onMouseEnter={() => setDropdownAcountOpen(true)} onMouseLeave={() => setDropdownAcountOpen(false)}>Акаунт
-                {dropdownAcountOpen && <DropdownAcount />}
-              </button>
+            {!user.isAuth ? <button onClick={() => (authModalOpen ? authClose() : authOpen())} className='myBtn'><img src={AcIm}/></button> : 
+              <div>
+                {user.user.role == "ADMIN" && <button className='myBtn acountBtn' onClick={() => navigate('/admin')}>Панель управління</button>}
+                <button className='myBtn acountBtn' onMouseEnter={() => setDropdownAcountOpen(true)} onMouseLeave={() => setDropdownAcountOpen(false)}>Акаунт
+                  {dropdownAcountOpen && <DropdownAcount setDropdownAcountOpen={setDropdownAcountOpen}/>}
+                </button>
+              </div>
             }
             
             {lessThan700 &&

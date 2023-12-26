@@ -1,4 +1,4 @@
-export const adminRoute = '/admin';
+export const adminRoute = '/admin/*';
 export const mainRoute = '/';
 export const basketRoute = '/basket';
 export const deviceRoute = '/device';

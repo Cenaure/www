@@ -1,4 +1,6 @@
 const {Schema, model} = require('mongoose');
+const attributeModel = require('./attribute-schema');
+const AttributeSchema = require('./attribute-schema');
 
 const DeviceSchema = new Schema({
     name: {type: String, unique: true, require: true},
@@ -7,8 +9,8 @@ const DeviceSchema = new Schema({
     imgs: [{type: String, unique: false, require: true}],
     typeId: {type: Schema.Types.ObjectId, ref: 'Type'},
     brandId: {type: Schema.Types.ObjectId, ref: 'Brand'},
-    info: [{ type: Schema.Types.ObjectId, ref: 'DeviceInfo' }],
-    characteristics: [{ type: Schema.Types.ObjectId, ref:'Characteristic' }]
+    description: [{ type: String, unique: false }],
+    attributes: [AttributeSchema]
 })
 
 module.exports = model('Device', DeviceSchema);

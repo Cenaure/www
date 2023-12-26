@@ -54,6 +54,7 @@ nav{
   border-radius: 50px !important;
   transition: all 0.3s ease 0s !important;
   position: relative;
+  margin-left: 10px;
 }
 
 .myBtn:hover{
