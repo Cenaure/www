@@ -1,0 +1,289 @@
+.name {
+  font-family: 'Roboto Mono Variable';
+  user-select: all;
+}
+
+.mainName {
+  font-weight: 400;
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  font-size: 1.4em;
+}
+
+.deviceContainer {
+  width: 100%;
+  height: 1000px;
+  border-radius: 20px;
+}
+
+.deviceImage{
+  height: 50vh;
+  display: 'block';
+  transition: all 0.2s; 
+}
+
+.imageContainer {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr, 1fr;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.deviceMainActions{
+  width: 100% !important;
+}
+
+.imageContainer div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.choiseImagesContainer{
+  height: auto;
+  width: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+@media (min-width: 1200px) {
+  .choiseImagesContainer{
+    justify-content: left !important;
+  }
+}
+
+.choiseImagesContainer img{
+  height: 10vh;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin: 0 5px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bababa;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7d7d7d;
+}
+
+.tools {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+.tools button {
+  border: none;
+  border-radius: 20px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 5px;
+  opacity: 0.7;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.tools button:hover {
+  opacity: 1;
+}
+
+.devicePanelBg {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  padding: 20px;  
+  height: auto;
+  justify-content: center;
+  display: flex;
+}
+
+.greyText{
+  color: rgb(134, 134, 134);
+  font-size: 12px;
+  margin: 0;
+}
+
+.devicePanelBg .nav-link{
+  margin-bottom: 10px;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.basketAdd {
+  color: white !important;
+  background-color: #4ee4aa !important;
+  height: 3em;
+  width: clamp(200px, 20vw, 350px);
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.basketAdd:hover {
+  background-color: #49d17d !important;
+}
+
+.price {
+  width: 100%;
+  text-align: left;
+  font-size: 30px;
+  color: rgb(234, 105, 69);
+  font-weight: 400;
+}
+
+.price span{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.status{
+  font-size: 12px;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  float: right;
+  justify-content: center;
+}
+.status p {
+  background-color: #b6ffe1;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.buttonsGroup {
+  display: flex;
+  justify-content: center;
+}
+
+.descriptionPanel{
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+h2{
+  text-align: center;
+}
+
+.descriptionContainer {
+  width: 100%;
+}
+
+.nameText{
+  font-weight: bold;
+}
+
+.favoriteBtn img {
+  height: 30px;
+  width: 30px;
+}
+
+.favoriteBtn {
+  background: none;
+  border: 0;
+}
+
+.mainCharacteristicsPanel{
+  height: 100% !important;
+}
+
+.descriptionCol{
+  margin-top: 10px !important;
+}
+
+.statusCol {
+  padding: 0 !important;
+}
+
+@media (max-width: 1200px) {
+  .basketAdd {
+    width: 80vw !important; 
+  }
+}
+.characteristics{
+  text-align: center;
+}
+
+.characteristics p, .characteristics h4{
+  display: inline-block;
+}
+
+.characteristics h4{
+  font-weight: bold;
+}
+
+.characteristics p {
+  font-weight: 350;
+}
+
+.characteristicsElement p {
+  display: inline-block;
+}
+
+.characteristicsElement {
+  width: 100%;
+  height: 30px;
+  border-bottom: 1px solid rgb(216, 230, 225);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 10px;
+}
+
+.feedbacks {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.deviceHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+#characteristics::before, #about::before, #description::before, #reviews::before {
+  content: "";
+  display: block;
+  padding-top: 60px; /* Высота вашего хедера */
+  margin-top: -60px; /* Отрицательный отступ равный высоте вашего хедера */
+  visibility: hidden;
+}
+

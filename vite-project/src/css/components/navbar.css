@@ -12,7 +12,7 @@
   color: #edf0f1;
   text-decoration: none;
 }
-header{
+.mynav{
   background-color: rgb(24, 24, 27);
 }
 
@@ -47,19 +47,6 @@ nav{
   color: rgb(195, 243, 169) !important;
 }
 
-.myBtn{
-  padding: 5px;
-  background-color: rgb(255, 255, 255);
-  border: 0;
-  border-radius: 50px !important;
-  transition: all 0.3s ease 0s !important;
-  position: relative;
-  margin-left: 10px;
-}
-
-.myBtn:hover{
-  background-color: rgba(136, 221, 126, 0.9);
-}
 .myBtn img{
   width: 30px;
   height: 30px;
@@ -75,6 +62,7 @@ nav{
 .burger{
   cursor: pointer;
 }
+
 .line {
   width: 25px;
   height: 2px;

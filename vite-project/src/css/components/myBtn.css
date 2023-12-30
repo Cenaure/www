@@ -1,0 +1,13 @@
+.myBtn{
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 0;
+  border-radius: 50px !important;
+  transition: all 0.3s ease 0s !important;
+  position: relative;
+  margin-left: 10px;
+}
+
+.myBtn:hover{
+  background-color: rgba(136, 221, 126, 0.9);
+}

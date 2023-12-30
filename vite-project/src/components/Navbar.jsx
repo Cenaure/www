@@ -6,11 +6,13 @@ import AuthModal from "./authModal/index";
 import RegModal from "./regModal/index";
 import {AnimatePresence} from "framer-motion";
 import AcIm from '../css/imgs/Account.png'
+import "../css/components/myBtn.css";
 import "../css/components/navbar.css";
 import { Container } from 'react-bootstrap';
 import { useMediaPredicate } from "react-media-hook";
 import DropdownAcount from './dropdownAcount.jsx';
 import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = observer(() => {
   const {user} = useContext(Context);
