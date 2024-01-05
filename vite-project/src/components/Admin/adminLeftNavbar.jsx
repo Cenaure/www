@@ -9,28 +9,29 @@ const AdminLeftNavbar = () => {
   const lessThan700 = useMediaPredicate("(max-width: 700px)");
 
   const [burgerClass, setBurgerClass] = useState("line unclicked");
-  const [menuClass, setMenuClass] = useState("menu hidden");
+  const [menuClass, setMenuClass] = useState("adminMenu hidden");
   const [isMenuClicked, setIsMenuClicked] = useState(false);
 
   const updateMenu = () => {
     if(!isMenuClicked){
       setBurgerClass("line clicked");
-      setMenuClass("menu visible");
+      setMenuClass("adminMenu visible");
     }
     else{
       setBurgerClass("line unclicked");
-      setMenuClass("menu hidden");
+      setMenuClass("adminMenu hidden");
     }
     setIsMenuClicked(!isMenuClicked);
   }
   
   return (
     <div className='adminNavBg'>
-      <Row>
+      <Row className={menuClass}>
         <Col xl={12}>
           <NavLink 
             to="/admin/orders" 
             className={"adminNavBtn"}
+            onClick={updateMenu}
           >
             Замовлення
           </NavLink>
@@ -39,6 +40,7 @@ const AdminLeftNavbar = () => {
           <NavLink 
             to="/admin/devices" 
             className={"adminNavBtn"}
+            onClick={updateMenu}
           >
             Товари
           </NavLink>
@@ -47,6 +49,7 @@ const AdminLeftNavbar = () => {
           <NavLink 
             to="/admin/messages" 
             className={"adminNavBtn"}
+            onClick={updateMenu}
           >
             Повідомлення
           </NavLink>
@@ -55,6 +58,7 @@ const AdminLeftNavbar = () => {
           <NavLink 
             to="/admin/reviews" 
             className={"adminNavBtn"}
+            onClick={updateMenu}
           >
             Відгуки
           </NavLink>
@@ -63,6 +67,7 @@ const AdminLeftNavbar = () => {
           <NavLink 
             to="/admin/clients" 
             className={"adminNavBtn"}
+            onClick={updateMenu}
           >
             Кліенти
           </NavLink>

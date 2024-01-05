@@ -14,7 +14,14 @@ class DeviceController {
             }
     
             let fileNames = [];
-            for (let file of req.files.imgs) {
+            if (Array.isArray(req.files.imgs)) {
+              for (let file of req.files.imgs) {
+                let fileName = uuid.v4() + ".jpg";
+                file.mv(path.resolve(__dirname, '..', 'static', fileName));
+                fileNames.push(fileName);
+              }
+            } else if (typeof req.files.imgs === 'object' && req.files.imgs !== null) {
+                let file = req.files.imgs;
                 let fileName = uuid.v4() + ".jpg";
                 file.mv(path.resolve(__dirname, '..', 'static', fileName));
                 fileNames.push(fileName);
@@ -59,7 +66,7 @@ class DeviceController {
     async getById(req, res, next) {
         try {
             const { id } = req.params;
-            const device = await Device.findOne({ _id: id }).populate('info');
+            const device = await Device.findOne({ _id: id });
             if (!device) {
                 throw new ApiError(404, 'Device not found');
             }

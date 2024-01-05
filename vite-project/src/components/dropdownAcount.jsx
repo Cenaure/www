@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import "../css/components/dropdown.css"
-import "../css/components/acountDropdown.css"
+import "../css/components/General/acountDropdown.css"
 import { Nav } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite';
 import { Context } from '../main.jsx';  

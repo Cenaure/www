@@ -1,13 +1,12 @@
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-const instance = axios.create({
-  withCredentials: true,
-});
+import instance from "../../http";
+import { API_URL } from "../../http";
+
 export const registrationPost = (email, password, name, surname, context, handleClose) => {
   const {user, server} = context;
 
   let data;
-  instance.post('http://localhost:5000/api/user/registration', {
+  instance.post(`${API_URL}/user/registration`, {
     email: email,
     password: password,
     firstName: name,

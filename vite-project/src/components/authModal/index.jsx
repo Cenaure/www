@@ -1,6 +1,6 @@
 import {motion} from "framer-motion";
 import Backdrop from "../Backdrop";
-import "../../css/components/customModal.css";
+import "../../css/components/General/customModal.css";
 import {useState, useEffect, useContext} from 'react';
 import dropIn from "../../utils/modalAnimation";
 import {Col} from 'react-bootstrap';

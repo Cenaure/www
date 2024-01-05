@@ -8,7 +8,7 @@ class ApiError extends Error {
         this.errors = errors;
     }
 
-    static BadRequest(message, errors = []){
+    static badRequest(message, errors = []){
         return new ApiError(484, message, errors)
     }
 

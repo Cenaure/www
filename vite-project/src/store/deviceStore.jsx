@@ -1,11 +1,8 @@
 import {makeAutoObservable} from "mobx";
 
-export default class deviceStore {
+class deviceStore {
     constructor(){
-        this._devices = [
-            {id: 1, name: 'd1'},
-            {id: 2, name: 'd2'}
-        ]
+        this._devices = []
         makeAutoObservable(this);
     }
 
@@ -13,3 +10,5 @@ export default class deviceStore {
 
     get Devices() { return this._devices; }
 }
+
+export default deviceStore

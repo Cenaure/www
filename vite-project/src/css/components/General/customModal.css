@@ -29,7 +29,7 @@
 }
 
 .btn-close{
-  --bs-btn-close-bg: url("../imgs/close-button.png") !important;
+  --bs-btn-close-bg: url("../../imgs/close-button.png") !important;
   box-shadow: none !important;
 }
 

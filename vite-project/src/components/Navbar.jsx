@@ -7,7 +7,7 @@ import RegModal from "./regModal/index";
 import {AnimatePresence} from "framer-motion";
 import AcIm from '../css/imgs/Account.png'
 import "../css/components/myBtn.css";
-import "../css/components/navbar.css";
+import "../css/components/General/navbar.css";
 import { Container } from 'react-bootstrap';
 import { useMediaPredicate } from "react-media-hook";
 import DropdownAcount from './dropdownAcount.jsx';
@@ -67,8 +67,7 @@ const Navbar = observer(() => {
                 <li><a href='#'>Сервіси</a></li>
                 {lessThan700 && <li>
                   <form className='searchField'>
-                    <input type='text' placeholder='Я хочу знайти...' name='q'>
-                    </input>
+                    <input type='text' placeholder='Я хочу знайти...' name='q'></input>
                     <button type='submit'>Ш</button>
                   </form>
                 </li>}

@@ -18,7 +18,8 @@
 }
 
 .deviceImage{
-  height: 50vh;
+  width: 100%;
+  object-fit: contain;
   display: 'block';
   transition: all 0.2s; 
 }
@@ -36,11 +37,13 @@
   overflow: hidden;
   margin-bottom: 10px;
 }
+
 .center {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .deviceMainActions{
   width: 100% !important;
 }

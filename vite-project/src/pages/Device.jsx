@@ -1,24 +1,44 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { Container, Image, Row, Col, NavLink, Navbar, Nav } from "react-bootstrap";
 import '@fontsource-variable/roboto-mono';
 import "../css/pages/device.css"
-import img1 from "../css/imgs/5108314144_w640_h640_materinska-plata-asus.webp"
-import img2 from "../css/imgs/asus-rog-maximus-z790-hero-eva-02-edition-s1700-intel-z790.jpg"
-import img3 from "../css/imgs/4129095115.jpg"
 import "../css/components/myBtn.css"
 import heart from "../css/imgs/heart.png"
 import scales from "../css/imgs/scales.svg"
 import { useMediaPredicate } from "react-media-hook";
+import { useParams } from 'react-router-dom';
+import Loader from '../components/loader.jsx';
+import { TransformWrapper, TransformComponent} from 'react-zoom-pan-pinch';
+import fetchOneDevice from "../components/axios-components/fetchOneDevice.jsx";
 
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 const Device = () => {
-  const price = 36851
-  const name = "Материнська плата Asus ROG MAXIMUS Z790 HERO EVA-02 (90MB1FL0M0EAY0)"
-  const images = [img1, img2, img3, img1, img2, img1, img2, img1, img2]
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+  
+  
 
   const lessThan1200 = useMediaPredicate("(max-width: 1200px)");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const { id } = useParams();
+  const [device, setDevice] = useState({info: []});
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    fetchOneDevice(id)
+      .then(data => {
+        setDevice(data);
+        setSelectedImage(import.meta.env.VITE_API_URL + '/' + data.imgs[0]);
+        setIsLoading(false);
+      })
+  }, []);
+
+  if (isLoading) {
+    return <Loader />; 
+  }
+
+  console.log(device);
+  const images = device.imgs.map((img) => import.meta.env.VITE_API_URL + '/' + img)
+  const price = device.price
+  const name =  device.name
+  const firstFourAttributes = device.attributes.slice(0, 4);
 
   return(
     <Container fluid>
@@ -61,22 +81,24 @@ const Device = () => {
                       <button onClick={() => resetTransform()}>×</button>
                     </div>
                     <TransformComponent>
-                      <Image src={selectedImage} alt="example" className="deviceImage"/>
+                      <div style={{maxWidth: "100%", height: "50vh"}}><Image src={selectedImage} alt="example" className="deviceImage"/></div>
                     </TransformComponent>
                   </div>)}
                 </TransformWrapper>
               </div>
-              <div className="choiseImagesContainer">
+              {device.imgs.length != 1 && <div className="choiseImagesContainer">
                 {images.map((image, index) => (
                   <Image
                     key={index}
                     src={image}
                     alt={`choice ${index}`}
-                    onClick={() => setSelectedImage(image)}
+                    onClick={() => 
+                      setSelectedImage(image)
+                    }
                     fluid
                   />
                 ))}
-              </div>
+              </div>}
             </div>
           </Col>
           <Col xl={7}> 
@@ -84,10 +106,7 @@ const Device = () => {
               {!lessThan1200 && <Col xl={6}>
                 <div className="devicePanelBg mainCharacteristicsPanel" >
                   <Row>
-                    <Col xl={6}><p className="greyText">Форм-фактор</p><NavLink>ATX</NavLink></Col>
-                    <Col xl={6}><p className="greyText">Тип роз'єму процесора</p><NavLink>LGA1700</NavLink></Col>
-                    <Col xl={6}><p className="greyText">Тип</p><NavLink>Материнські плати Intel</NavLink></Col>
-                    <Col xl={6}><p className="greyText">Сумісні ОЗП</p><NavLink>DDR5 для ПК</NavLink></Col>
+                    {firstFourAttributes.map((attribute) => <Col xl={6} key={attribute._id}><p className="greyText">{attribute.name}</p><NavLink>{attribute.value}</NavLink></Col>)}
                   </Row>
                 </div>
               </Col>}
@@ -104,29 +123,17 @@ const Device = () => {
                   </Row>
                 </div></div>
               </Col>
-              <Col xl={12} className="descriptionCol">
+              {device.description.length != 0 && <Col xl={12} className="descriptionCol">
                 <div id="description"></div>
                 <div className="devicePanelBg">
                   <div className="descriptionContainer">
                     <h2>Опис товару</h2>
                     <div className="descriptionPanel">
-                      <p>
-                        <span className="nameText">Материнська плата Asus ROG MAXIMUS Z790 HERO EVA-02</span> - це високоякісний продукт, який відповідає найвищим стандартам продуктивності та надійності.
-                      </p>
-                      <p>
-                        Ця материнська плата оснащена набором мікросхем <span className="nameText">Intel Z790</span>, що забезпечує підтримку найновіших процесорів Intel. Вона також має чотири слоти для пам’яті <span className="nameText">DDR5</span>, що дозволяють встановити до <span className="nameText">128 ГБ</span> оперативної пам’яті.
-                      </p>
-                      <p>
-                        <span className="nameText">Asus ROG MAXIMUS Z790 HERO EVA-02</span> має два слоти <span className="nameText">PCIe 4.0 x16</span> для встановлення відеокарт, а також шість портів SATA для підключення накопичувачів. Ця материнська плата також має вбудований Wi-Fi 6 та Bluetooth 5.0 для бездротового підключення.
-                      </p>
-                      <p style={{marginBottom: 0}}>
-                        Дизайн EVA-02 відображає естетику “Evangelion”, що робить цю материнську плату ідеальним вибором для фанатів цього аніме.
-                      </p>
+                      {device.description}
                     </div>
-
                   </div>
                 </div>
-              </Col>
+              </Col>}
             </Row>
           </Col>
           
@@ -135,90 +142,11 @@ const Device = () => {
             <div className="devicePanelBg">
               <div className="characteristics">
                 <h4>Характеристики <p className="name">{name}</p></h4>
-                <div className="characteristicsElement">
-                  <p>Гарантійний термін</p>
-                  <p>12 міс</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Виробник</p>
-                  <p>Asus</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Роз'єм процесора</p>
-                  <p>LGA1700</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Чіпсет (Північний міст)</p>
-                  <p>Intel Z790</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Тип пам'яті</p>
-                  <p>DDR5 DIMM</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Сумісні ОЗП</p>
-                  <p>DDR5 для ПК</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Кількість слотів пам'яті</p>
-                  <p>4</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Гарантійний термін</p>
-                  <p>12 міс</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Виробник</p>
-                  <p>Asus</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Роз'єм процесора</p>
-                  <p>LGA1700</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Чіпсет (Північний міст)</p>
-                  <p>Intel Z790</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Тип пам'яті</p>
-                  <p>DDR5 DIMM</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Сумісні ОЗП</p>
-                  <p>DDR5 для ПК</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Кількість слотів пам'яті</p>
-                  <p>4</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Гарантійний термін</p>
-                  <p>12 міс</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Виробник</p>
-                  <p>Asus</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Роз'єм процесора</p>
-                  <p>LGA1700</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Чіпсет (Північний міст)</p>
-                  <p>Intel Z790</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Тип пам'яті</p>
-                  <p>DDR5 DIMM</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Сумісні ОЗП</p>
-                  <p>DDR5 для ПК</p>
-                </div>
-                <div className="characteristicsElement">
-                  <p>Кількість слотів пам'яті</p>
-                  <p>4</p>
-                </div>
+                {device.attributes.map((attribute) => 
+                <div className="characteristicsElement" key={attribute._id}>
+                  <p>{attribute.name}</p>
+                  <p>{attribute.value}</p>
+                </div>)}
               </div>
             </div>
           </Col>

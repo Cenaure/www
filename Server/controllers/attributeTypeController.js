@@ -47,7 +47,7 @@ class AttributeTypeController {
 
         res.send({ message: 'Характеристика оновлена' });
       } catch (err) {
-        next(ApiError.internal(error.message));
+        next(ApiError.internal(err.message));
       }
     }
 
@@ -61,13 +61,13 @@ class AttributeTypeController {
           return res.status(404).send({ message: 'Тип продукта не найден' });
         }
 
-        productType.attributes.id(attributeId).remove();
+        productType.attributes.id(attributeId).deleteOne();
 
         await productType.save();
 
         res.send({ message: 'Характеристика видалена' });
       } catch (err) {
-        next(ApiError.internal(error.message));
+        next(ApiError.internal(err.message));
       }
     }
 

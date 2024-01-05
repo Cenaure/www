@@ -13,12 +13,15 @@
   justify-content: center;
   display: flex;
 }
+
 .col-xl-12 a {
   transition: all 0.2s;
 }
+
 .col-xl-12 a.active {
   background-color: rgb(48, 48, 56);
 }
+
 .adminNavBtn {
   width: 100%;
   height: 100%;
@@ -39,6 +42,7 @@
 .burger{
   cursor: pointer;
 }
+
 .line {
   width: 25px;
   height: 2px;
@@ -52,9 +56,40 @@
 .line.clicked:nth-child(2){
   opacity: 0;
 }
+
 .line.clicked:nth-child(1){
   transform: translateY(8px) rotate(45deg);
 }
+
 .line.clicked:nth-child(3){
   transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (max-width: 700px) {
+  .adminNavBg {
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .adminMenu {
+    position: fixed;
+    left: -100%;
+    top: 108px;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(24, 24, 27);
+    text-align: center;
+    flex-direction: column;
+    transition: all 0.2s;
+    z-index: 3;
+  }
+  
+  .adminMenu.visible{
+    left: 0;
+  }
 }

@@ -1,6 +1,6 @@
 import {motion} from "framer-motion";
 import Backdrop from "../Backdrop";
-import "../../css/components/customModal.css";
+import "../../css/components/General/customModal.css";
 import "../../css/components/regModal.css";
 import {useState, useEffect, useContext } from 'react';
 import dropIn from "../../utils/modalAnimation";
@@ -9,7 +9,6 @@ import {Col, Form} from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../main.jsx';  
 import registrationValidation from "../validation/registrationValidation.jsx";
-
 const Modal = observer(({handleClose, switchToAuth}) => {
   const [enlarged, setEnlarged] = useState(false);
   

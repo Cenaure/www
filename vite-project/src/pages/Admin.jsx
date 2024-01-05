@@ -10,7 +10,7 @@ const Admin = () => {
       <AdminLeftNavbar />
       <div className="content">
         <Routes>
-          <Route path="/devices" element={<DevicesPage />} />
+          <Route path="/devices/*" element={<DevicesPage />} />
         </Routes>
       </div>
     </div>

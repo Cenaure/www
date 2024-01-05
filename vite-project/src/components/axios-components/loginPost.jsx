@@ -1,8 +1,6 @@
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-const instance = axios.create({
-  withCredentials: true,
-});
+import instance from "../../http";
+
 const loginPost = (email, password, context, handleClose) => {
   const {user, server} = context
  

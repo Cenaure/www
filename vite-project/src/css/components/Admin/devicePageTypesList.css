@@ -1,0 +1,29 @@
+.devicePageTypesList{
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  padding: 20px;  
+  height: auto;
+  justify-content: center;
+  display: flex;
+}
+
+.listElement {
+  width: 100%;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.devicePageTypesList a{
+  text-decoration: none !important;
+  color: black !important;
+}

@@ -2,7 +2,7 @@ const Type = require('../models/type-model');
 const ApiError = require('../error/api-error');
 
 class TypeController {
-    async create(req, res) {
+    async create(req, res, next) {
         const { name } = req.body;
 
         if (!name) {
