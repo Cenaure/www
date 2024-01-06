@@ -1,7 +1,7 @@
 import { API_URL } from "../../http";
 import instance from "../../http";
 
-const fetchTypes = async (id) => {
+const fetchTypes = async () => {
   try {
     const {data} = await instance.get(`${API_URL}/type`)
     return data

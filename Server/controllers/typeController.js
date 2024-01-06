@@ -27,6 +27,19 @@ class TypeController {
             res.status(500).json({ message: 'Внутрішня помилка сервера' });
         }
     }
+
+    async getOne(req, res, next) {
+        try {
+            const { typeId } = req.params;
+            const type = await Type.findById(typeId);
+            if (!type) {
+                throw new ApiError(404, 'Type not found');
+            }
+            return res.json(type);
+        } catch (error) {
+            next(ApiError.internal(error.message));
+        }
+    }
 }
 
 module.exports = new TypeController;

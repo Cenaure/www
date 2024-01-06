@@ -3,7 +3,7 @@ import '../../css/components/Admin/page.css'
 import "../../css/components/myBtn.css";
 import DevicePageTypesList from '../../components/Admin/devicePageTypesList';
 import { Col, Row } from 'react-bootstrap';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import AdminDevicesList from '../../components/Admin/adminDevicesList';
 const DevicesPage = () => {
 
@@ -11,7 +11,7 @@ const DevicesPage = () => {
     <div className='pageContainer'>
       <div className="devicesPageNav">
         <button className='myBtn createBtn'>Фільтри</button>
-        <button className='myBtn createBtn'>Створити товар</button>
+        <NavLink to="create"><button className='myBtn createBtn'>Створити товар</button></NavLink>
       </div>
       <Row>
         <Col xl={3}>

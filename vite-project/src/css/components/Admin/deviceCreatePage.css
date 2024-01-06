@@ -1,0 +1,12 @@
+.deviceCreateForm input{
+  border-radius: 5px;
+}
+
+.deviceCreateForm input:focus{
+  border-color: rgb(20, 20, 23) !important;
+}
+
+.formOptions select:focus {
+  border-color: rgb(20, 20, 23);
+  box-shadow: none;
+}

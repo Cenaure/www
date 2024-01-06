@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/components/Admin/devicePageTypesList.css'
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Placeholder } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import fetchTypes from '../axios-components/fetchTypes';
 const DevicePageTypesList = () => {
@@ -17,19 +17,21 @@ const DevicePageTypesList = () => {
   }, []);
 
   console.log(types)
-  
-  if (loading) return(<></>)
   return (
     <div className="devicePageTypesList">
       <Row>
         <Col xl={12}>
           <div style={{textAlign: "center"}}><h3>Категорії</h3></div>
         </Col> 
-        {types.map((type) => (
+        {!loading && types.map((type) => (
           <Col xl={12} key={type._id}>
             <NavLink to={`type/${type._id}`}><div className="listElement">{type.name}</div></NavLink>
           </Col> 
         ))}
+        {loading &&
+        <Col xl={12}>
+          <NavLink><div className="listElement"><Placeholder xs={6} /></div></NavLink>
+        </Col> }
       </Row>
     </div>
   )
