@@ -6,7 +6,7 @@ const path = require('path');
 class DeviceController {
     async create(req, res, next) {
         try {
-            const { name, price, brandId, typeId, info} = req.body;
+            const { name, price, brandId, typeId, description} = req.body;
     
             const existingDevice = await Device.findOne({ name });
             if (existingDevice) {
@@ -27,7 +27,7 @@ class DeviceController {
                 fileNames.push(fileName);
             }
 
-            const device = await Device.create({ name, price, brandId, typeId, imgs: fileNames});
+            const device = await Device.create({ name, price, brandId, typeId, imgs: fileNames, description});
     
             return res.json(device);
         } catch (error) {

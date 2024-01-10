@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/components/Admin/devicePageTypesList.css'
-import { Row, Col, Placeholder } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import '../../css/components/General/panel.css'
+import { Row, Col, Spinner } from 'react-bootstrap';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import fetchTypes from '../axios-components/fetchTypes';
 const DevicePageTypesList = () => {
   
   const [types, setTypes] = useState({info: []});
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     fetchTypes()
@@ -18,10 +20,11 @@ const DevicePageTypesList = () => {
 
   console.log(types)
   return (
-    <div className="devicePageTypesList">
+    <div className="devicePageTypesList panel">
       <Row>
         <Col xl={12}>
           <div style={{textAlign: "center"}}><h3>Категорії</h3></div>
+          {location.pathname != '/admin/devices/' && <div style={{textAlign: 'center', textDecoration: 'underline'}}><Link to="/admin/devices/">Очистити</Link></div>}
         </Col> 
         {!loading && types.map((type) => (
           <Col xl={12} key={type._id}>
@@ -30,7 +33,11 @@ const DevicePageTypesList = () => {
         ))}
         {loading &&
         <Col xl={12}>
-          <NavLink><div className="listElement"><Placeholder xs={6} /></div></NavLink>
+          <div style={{width: '100%', display: 'flex', justifyContent: 'center', height: '20vh', alignItems: 'center'}}>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
         </Col> }
       </Row>
     </div>

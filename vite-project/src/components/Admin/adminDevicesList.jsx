@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import fetchAllDevices from '../axios-components/fetchAllDevices';
 import { useParams } from 'react-router-dom';
+import DeviceCard from './deviceCard';
 
 const AdminDevicesList = () => {
 
@@ -21,9 +22,9 @@ const AdminDevicesList = () => {
   if (loading) return(<></>)
 
   return (
-    <div className="">
+    <div style={{marginTop: "20px"}}>
       {devices.map((device, index) => (
-        <p key={index}>{device.name}</p>
+        <DeviceCard key={index} device={device}/>
       ))}
     </div>
   )

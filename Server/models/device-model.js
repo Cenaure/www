@@ -9,7 +9,7 @@ const DeviceSchema = new Schema({
     imgs: [{type: String, unique: false, require: true}],
     typeId: {type: Schema.Types.ObjectId, ref: 'Type'},
     brandId: {type: Schema.Types.ObjectId, ref: 'Brand'},
-    description: [{ type: String, unique: false }],
+    description: { type: String, unique: false },
     attributes: [AttributeSchema]
 })
 

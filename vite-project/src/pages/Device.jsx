@@ -123,7 +123,7 @@ const Device = () => {
                   </Row>
                 </div></div>
               </Col>
-              {device.description.length != 0 && <Col xl={12} className="descriptionCol">
+              {device.description && <Col xl={12} className="descriptionCol">
                 <div id="description"></div>
                 <div className="devicePanelBg">
                   <div className="descriptionContainer">

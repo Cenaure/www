@@ -19,7 +19,7 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     if (error.response.status === 401) {
-      const response = await instance.get(`${API_URL}/refresh`);
+      const response = await instance.get(`${API_URL}/user/refresh`);
       localStorage.setItem('token', response.data.accessToken);
       return instance(originalRequest);
     }

@@ -1,0 +1,12 @@
+.panel {
+  width: 100%;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  padding: 20px;  
+  height: auto;
+  justify-content: center;
+  display: flex;
+}

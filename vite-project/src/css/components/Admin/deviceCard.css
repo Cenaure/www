@@ -1,0 +1,10 @@
+.deviceCardContainer {
+  height: 8vh;
+  display: flex;
+  margin-top: 10px;
+}
+
+.t {
+  text-decoration: none !important;
+  color: black !important;
+}
