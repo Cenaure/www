@@ -3,19 +3,23 @@ const ApiError = require('../error/api-error');
 
 class TypeController {
     async create(req, res, next) {
-        const { name } = req.body;
+        try {
+            const { name } = req.body;
 
-        if (!name) {
-            next(ApiError.badRequest(error.message));
+            if (!name) {
+                next(ApiError.badRequest("Не вказане ім'я категорії"));
+            }
+
+            const existingType = await Type.findOne({ name });
+            if (existingType) {
+                next(ApiError.badRequest("Така категорія вже існує"));
+            }
+
+            const type = await Type.create({ name });
+            res.json(type);
+        } catch (error) {
+            next(ApiError.internal(error.message))
         }
-
-        const existingType = await Type.findOne({ name });
-        if (existingType) {
-            next(ApiError.badRequest(error.message));
-        }
-
-        const type = await Type.create({ name });
-        res.json(type);
     }
 
     async getAll(req, res) {

@@ -1,5 +1,4 @@
 const {Schema, model} = require('mongoose');
-const attributeModel = require('./attribute-schema');
 const AttributeSchema = require('./attribute-schema');
 
 const DeviceSchema = new Schema({

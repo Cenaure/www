@@ -1,3 +1,8 @@
 .pageContainer {
   padding: 10px;
 }
+
+.filtersBlocks {
+  position: absolute;
+  z-index: 2;
+}

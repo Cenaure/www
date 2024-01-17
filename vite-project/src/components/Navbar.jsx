@@ -11,7 +11,7 @@ import "../css/components/General/navbar.css";
 import { Container } from 'react-bootstrap';
 import { useMediaPredicate } from "react-media-hook";
 import DropdownAcount from './dropdownAcount.jsx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const Navbar = observer(() => {
@@ -59,7 +59,7 @@ const Navbar = observer(() => {
       <header className='mynav'>
         <Container fluid>
           <div className='topNav'>
-            <a className='navBrand' href='/'>gigix</a>
+            <Link className='navBrand' to='/'>gigix</Link>
             <nav className={menuClass}>
               <ul className='navbar-links'>
                 <li><a href='#'>Сервіси</a></li>

@@ -1,18 +1,18 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import Slider from "../components/Slider";
-import LeftNav from "../components/leftNavbar";
+import Slider from "../../components/Slider";
+import LeftNav from "../../components/leftNavbar";
 import { useMediaPredicate } from "react-media-hook";
-import "../css/pages/main.css"
-import "../css/components/breadcrumb.css"
-import amdLogo from '../css/imgs/AMD-logo.png';
-import amdRadeonLogo from '../css/imgs/AMDRadeon-logo.png';
-import intelLogo from '../css/imgs/Intel-logo.png';
-import motherboardLogo from '../css/imgs/Motherboard-logo.png';
-import nvidiaLogo from '../css/imgs/Nvidia-logo.png';
-import intelMotherboardLogo from '../css/imgs/IntelMotherboard-logo.png';
-import Eva02 from '../css/imgs/Eva02-logo.jpg';
-import DDR5 from '../css/imgs/DDR5-logo.png';
+import "../../css/pages/main.css"
+import "../../css/components/breadcrumb.css"
+import amdLogo from '../../css/imgs/AMD-logo.png';
+import amdRadeonLogo from '../../css/imgs/AMDRadeon-logo.png';
+import intelLogo from '../../css/imgs/Intel-logo.png';
+import motherboardLogo from '../../css/imgs/Motherboard-logo.png';
+import nvidiaLogo from '../../css/imgs/Nvidia-logo.png';
+import intelMotherboardLogo from '../../css/imgs/IntelMotherboard-logo.png';
+import Eva02 from '../../css/imgs/Eva02-logo.jpg';
+import DDR5 from '../../css/imgs/DDR5-logo.png';
 
 const Main = () => {
 

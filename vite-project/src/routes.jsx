@@ -1,12 +1,12 @@
-import Admin from "./pages/Admin";
-import Basket from "./pages/Basket";
-import Device from "./pages/Device";
-import Main from "./pages/Main";
-import AboutUs from "./pages/AboutUs";
-import Types from "./pages/Types";
-import Contacts from "./pages/Contacts";
+import Admin from "./pages/Main/Admin";
+import Basket from "./pages/Targeted/Basket";
+import Device from "./pages/Targeted/Device";
+import Main from "./pages/Main/Main";
+import AboutUs from "./pages/Main/AboutUs";
+import Types from "./pages/Main/Types";
+import Contacts from "./pages/Main/Contacts";
 import { adminRoute, basketRoute, mainRoute, deviceRoute, aboutUsRoute, typesRoute, contactsRoute, acountRoute } from "./utils/consts";
-import Acount from "./pages/Acount";
+import Acount from "./pages/Targeted/Acount";
 
 export const authRoutes = [
     {

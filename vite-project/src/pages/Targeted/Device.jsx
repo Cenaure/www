@@ -1,19 +1,19 @@
 import React, {useState, useEffect, useContext} from "react";
 import { Container, Image, Row, Col, NavLink, Navbar, Nav } from "react-bootstrap";
 import '@fontsource-variable/roboto-mono';
-import "../css/pages/device.css"
-import "../css/components/myBtn.css"
-import heart from "../css/imgs/heart.png"
-import scales from "../css/imgs/scales.svg"
+import "../../css/pages/device.css"
+import "../../css/components/myBtn.css"
+import heart from "../../css/imgs/heart.png"
+import scales from "../../css/imgs/scales.svg"
 import { useMediaPredicate } from "react-media-hook";
 import { useParams } from 'react-router-dom';
-import Loader from '../components/loader.jsx';
+import Loader from '../../components/loader.jsx';
 import { TransformWrapper, TransformComponent} from 'react-zoom-pan-pinch';
-import fetchOneDevice from "../components/axios-components/fetchOneDevice.jsx";
+import fetchOneDevice from "../../components/axios-components/fetchOneDevice.jsx";
 
 const Device = () => {
-  
-  
+
+
 
   const lessThan1200 = useMediaPredicate("(max-width: 1200px)");
   const [selectedImage, setSelectedImage] = useState(null);

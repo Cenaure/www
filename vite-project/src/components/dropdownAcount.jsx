@@ -5,7 +5,7 @@ import { Nav } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite';
 import { Context } from '../main.jsx';  
 import logoutPost from './axios-components/logoutPost.jsx'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const DropdownAcount = observer(({setDropdownAcountOpen}) => {
 
@@ -22,7 +22,7 @@ const DropdownAcount = observer(({setDropdownAcountOpen}) => {
   return(
     <div className="myDropdown acountDropdown">
       <div className='myDropdownContent'>
-        <Nav.Link href="/acount">Налаштування</Nav.Link>
+        <Link to="/acount">Налаштування</Link>
         <Nav.Link className='mt-3' onClick={() => logout()}>Вихід</Nav.Link>
       </div>
     </div>

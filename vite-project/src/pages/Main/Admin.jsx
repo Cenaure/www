@@ -1,9 +1,10 @@
 import React from 'react';
-import AdminLeftNavbar from '../components/Admin/adminLeftNavbar';
+import AdminLeftNavbar from '../../components/Admin/adminLeftNavbar';
 import { Routes, Route } from 'react-router-dom';
-import DevicesPage from './Admin/DevicesPage';
-import "../css/pages/admin.css"
-import DeviceCreate from '../components/Admin/deviceCreate';
+import DevicesPage from '../Admin/DevicesPage';
+import "../../css/pages/admin.css"
+import DeviceCreate from '../../components/Admin/deviceCreate';
+import TypesCreatePage from '../../components/Admin/typesCreatePage';
 const Admin = () => {
   
   return(
@@ -13,6 +14,8 @@ const Admin = () => {
         <Routes>
           <Route path="/devices/create" element={<DeviceCreate />} />
           <Route path="/devices/*" element={<DevicesPage />} />
+          <Route path="/types/*" element={<>123</>} />
+          <Route path="/types/create" element={<TypesCreatePage />} />
         </Routes>
       </div>
     </div>

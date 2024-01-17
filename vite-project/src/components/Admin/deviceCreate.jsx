@@ -69,7 +69,7 @@ const DeviceCreate = () => {
   return(
     <>
       <div className="devicesPageNav" style={{justifyContent: "right", padding: '10px'}}>
-        <NavLink><button className='myBtn createBtn' onClick={() => createDevice(name, price, imgs, selectedTypeId, selectedBrandId, description, values)}>Створити товар</button></NavLink>
+        <button className='myBtn createBtn' onClick={() => createDevice(name, price, imgs, selectedTypeId, selectedBrandId, description, values)}>Зберегти товар</button>
       </div>
       <Row className='mt-2'>
         <Col xl={6} sm={9} xs={8} className={lessThan1200 ? "" : ""}>
@@ -153,7 +153,12 @@ const DeviceCreate = () => {
             {selectedType.attributes.map((attribute, index) => (
               <div className="attributeElement" key={index}>
                 <div className="attributeName">{attribute.name}</div>
-                <Form.Control type="text" placeholder="Значення" onChange={e => setValues({...values, [index]: {attributeId: attribute._id, value: e.target.value}})} style={{width: '50%'}}/>
+                <Form.Select defaultValue="Оберіть значення" onChange={e => setValues({...values, [index]: {attributeId: attribute._id, value: e.target.value}})} style={{width: '15rem'}}>
+                  <option value={""}>Оберіть значення...</option>
+                  {attribute.values.map((value, index) => (
+                    <option value={value} key={index}>{value}</option>
+                  ))}
+                </Form.Select>
               </div>
             ))}
           </div>}

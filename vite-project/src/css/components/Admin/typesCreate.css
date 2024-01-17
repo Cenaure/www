@@ -1,0 +1,48 @@
+header {
+  display: flex;  
+  justify-content: right;
+  padding: 10px;
+}
+
+.typesPageGrid{
+  display: grid;
+  width: 100%;
+  grid-template-columns: 3fr 1fr;
+  column-gap: 20px;
+  padding: 20px;
+}
+
+.attributeValueInput{
+  border: 0;
+  text-align: center;
+}
+
+.inputWithSlash {
+  position: relative;
+  width: 14rem;
+}
+
+.slash {
+  position: absolute;
+  right: 10px; /* Расстояние слеша от правого края инпута */
+  top: 50%; /* Чтобы слеш был по центру по вертикали */
+  transform: translateY(-50%); /* Чтобы слеш был по центру по вертикали */
+}
+
+.attrValuesContainer {
+  display: flex; /* Элементы внутри будут выстроены горизонтально */
+  flex-wrap: wrap; /* Если элементы не влезают, они переносятся на следующую строку */
+  gap: 10px;
+}
+
+.attributeNameInput {
+  height: 50px;
+  border: 0;
+  text-align: center;
+}
+
+.typesAddButton {
+  border: 0;
+  background-color: white;
+  text-decoration: underline;
+}

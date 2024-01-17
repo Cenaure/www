@@ -75,6 +75,18 @@ class DeviceController {
             next(ApiError.internal(error.message));
         }
     }   
+
+    async deleteDevices(req, res, next){
+        try {
+            const { deviceIds } = req.body;
+
+            const result = await Device.deleteMany({ _id: { $in: deviceIds } });
+
+            res.json({ success: true, deletedCount: result.deletedCount });
+        } catch(error) {
+            next(ApiError.internal(error.message));
+        }
+    }
 }
 
 module.exports = new DeviceController();

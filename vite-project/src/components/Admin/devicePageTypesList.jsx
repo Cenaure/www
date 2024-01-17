@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import '../../css/components/Admin/devicePageTypesList.css'
 import '../../css/components/General/panel.css'
-import { Row, Col, Spinner } from 'react-bootstrap';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Row, Col} from 'react-bootstrap';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import fetchTypes from '../axios-components/fetchTypes';
+import { motion } from 'framer-motion';
+
 const DevicePageTypesList = () => {
   
   const [types, setTypes] = useState({info: []});
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTypes()
@@ -18,29 +21,27 @@ const DevicePageTypesList = () => {
       })
   }, []);
 
-  console.log(types)
+  if(loading) return <></>
+
   return (
-    <div className="devicePageTypesList panel">
+    <motion.div className="devicePageTypesList panel" initial={{ y: 100 }} animate={{ y: 0 }} transition={{ duration: 0.2 }}>
       <Row>
         <Col xl={12}>
           <div style={{textAlign: "center"}}><h3>Категорії</h3></div>
-          {location.pathname != '/admin/devices/' && <div style={{textAlign: 'center', textDecoration: 'underline'}}><Link to="/admin/devices/">Очистити</Link></div>}
+          {location.pathname != '/admin/devices' && <div style={{textAlign: 'center', textDecoration: 'underline'}}><Link to="/admin/devices">Очистити</Link></div>}
         </Col> 
         {!loading && types.map((type) => (
           <Col xl={12} key={type._id}>
             <NavLink to={`type/${type._id}`}><div className="listElement">{type.name}</div></NavLink>
           </Col> 
         ))}
-        {loading &&
         <Col xl={12}>
-          <div style={{width: '100%', display: 'flex', justifyContent: 'center', height: '20vh', alignItems: 'center'}}>
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
+          <div style={{display: 'flex', width: '100%', justifyContent: 'center', marginTop: '20px'}}>
+            <button className='myBtn createBtn' onClick={() => navigate('/admin/types/create')}>Створити категорію</button>
           </div>
-        </Col> }
+        </Col>
       </Row>
-    </div>
+    </motion.div>
   )
 }
  
