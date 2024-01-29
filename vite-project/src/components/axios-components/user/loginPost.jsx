@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import instance from "../../http";
+import instance from "../../../http";
 
 const loginPost = (email, password, context, handleClose) => {
   const {user, server} = context

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import '../../css/components/Admin/typesCreate.css'
-import { Row, Col } from 'react-bootstrap';
 import '../../css/components/button.css'
-import createType from '../axios-components/typeCreate';
+import createType from '../axios-components/types/typeCreate';
 const TypesCreatePage = () => {
   const [name, setName] = useState();
   const [attributes, setAttributes] = useState([{ name: '', values: [''] }]);

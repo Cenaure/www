@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 
-class deviceStore {
+export default class deviceStore {
     constructor(){
         this._devices = []
         makeAutoObservable(this);
@@ -8,7 +8,5 @@ class deviceStore {
 
     setDevices(devices){ this._devices = devices; }
 
-    get Devices() { return this._devices; }
+    get devices() { return this._devices; }
 }
-
-export default deviceStore

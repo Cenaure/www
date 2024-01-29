@@ -1,5 +1,5 @@
-import instance from "../../http";
-import { API_URL } from "../../http";
+import instance from "../../../http";
+import { API_URL } from "../../../http";
 const logoutPost = async (context, navigate) => {
   const {user, server} = context
     instance.post(`${API_URL}/user/logout`, {}).then(res => {

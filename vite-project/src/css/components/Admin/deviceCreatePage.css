@@ -62,3 +62,11 @@
     margin-top: 10px !important;
   } 
 }
+
+.erInput {
+  border-color: rgb(247, 143, 143) !important;
+}
+
+.erText{
+  margin: 0 !important;
+}

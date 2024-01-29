@@ -1,5 +1,5 @@
 import validator from 'validator';
-import loginPost from '../axios-components/loginPost';
+import loginPost from '../axios-components/user/loginPost';
 
 const loginValidation = (email, password, context, handleClose) => {
   let errors = {}
@@ -7,7 +7,7 @@ const loginValidation = (email, password, context, handleClose) => {
     email: "form-control",
     password: "form-control",
   };
-  let success = false;
+  
   if (!validator.isEmail(email)) {
     errors.email = email ? "Введений Email некоректний" : "Введіть Email";
     invClass.email = "form-control erInput"

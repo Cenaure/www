@@ -1,5 +1,5 @@
-import { API_URL } from "../../http";
-import instance from "../../http";
+import { API_URL } from "../../../http";
+import instance from "../../../http";
 
 const createType = async (name, attributes) => {
   try {

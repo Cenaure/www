@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../../http";
+import { API_URL } from "../../../http";
 
 const instance = axios.create({
   withCredentials: true,

@@ -1,5 +1,5 @@
-import { API_URL } from "../../http";
-import instance from "../../http";
+import { API_URL } from "../../../http";
+import instance from "../../../http";
 import createDeviceAttribute from "./createDeviceAttribute";
 
 const createDevice = async (name, price, imgs, typeId, brandId, description, values) => {

@@ -277,7 +277,7 @@ h2{
 .deviceHeader {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 3;
   background-color: #fff;
   margin-bottom: 10px;
 }
@@ -285,8 +285,7 @@ h2{
 #characteristics::before, #about::before, #description::before, #reviews::before {
   content: "";
   display: block;
-  padding-top: 60px; /* Высота вашего хедера */
-  margin-top: -60px; /* Отрицательный отступ равный высоте вашего хедера */
+  padding-top: 60px; 
+  margin-top: -60px; 
   visibility: hidden;
 }
-

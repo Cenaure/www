@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
-import instance from "../../http";
-import { API_URL } from "../../http";
+import instance from "../../../http";
+import { API_URL } from "../../../http";
 
 export const registrationPost = (email, password, name, surname, context, handleClose) => {
   const {user, server} = context;

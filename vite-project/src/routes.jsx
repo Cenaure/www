@@ -5,8 +5,9 @@ import Main from "./pages/Main/Main";
 import AboutUs from "./pages/Main/AboutUs";
 import Types from "./pages/Main/Types";
 import Contacts from "./pages/Main/Contacts";
-import { adminRoute, basketRoute, mainRoute, deviceRoute, aboutUsRoute, typesRoute, contactsRoute, acountRoute } from "./utils/consts";
+import { adminRoute, basketRoute, mainRoute, deviceRoute, aboutUsRoute, typesRoute, contactsRoute, acountRoute, devicesRoute } from "./utils/consts";
 import Acount from "./pages/Targeted/Acount";
+import Devices from "./pages/Main/DevicesList";
 
 export const authRoutes = [
     {
@@ -31,6 +32,10 @@ export const publicRoutes = [
     {
         path: deviceRoute + '/:id', 
         element: Device
+    },
+    {
+        path: devicesRoute,
+        element: Devices
     },
     {
         path: aboutUsRoute, 

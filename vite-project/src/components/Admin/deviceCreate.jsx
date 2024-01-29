@@ -3,15 +3,25 @@ import { NavLink } from 'react-router-dom';
 import { Row, Col, Form, Image } from 'react-bootstrap';
 import '../../css/components/Admin/deviceCreatePage.css'
 import '../../css/components/General/panel.css'
-import fetchTypes from '../axios-components/fetchTypes';
-import fetchOneType from '../axios-components/fetchOneType';
-import fetchBrands from '../axios-components/fetchBrands';
+import fetchTypes from '../axios-components/types/fetchTypes';
+import fetchOneType from '../axios-components/types/fetchOneType';
+import fetchBrands from '../axios-components/brands/fetchBrands';
 import { TransformWrapper, TransformComponent} from 'react-zoom-pan-pinch';
-import createDevice from '../axios-components/createDevice';
+import createDevice from '../axios-components/devices/createDevice';
 import { useMediaPredicate } from "react-media-hook";
+import deviceValidation from '../validation/deviceValidation';
 
 const DeviceCreate = () => {
 
+  const [invClass, setInvClass] = useState({
+    name: "form-control",
+    price: "form-control",
+    imgs: "form-control",
+    category: "form-control",
+    brand: "form-control",
+  });
+
+  const [errors, setErrors] = useState({});
   const [name, setName] = useState()
   const [price, setPrice] = useState()
   const [selectedTypeId, setSelectedTypeId] = useState()
@@ -66,51 +76,82 @@ const DeviceCreate = () => {
     setSelectedImage(e.target.files[0])
   };
 
+  const handleSubmit = () => {
+    let data = deviceValidation(name, price, imgs, selectedTypeId, selectedBrandId, description, values);
+    setErrors(data[0]);
+    setInvClass(data[1]);
+  };
+
   return(
     <>
       <div className="devicesPageNav" style={{justifyContent: "right", padding: '10px'}}>
-        <button className='myBtn createBtn' onClick={() => createDevice(name, price, imgs, selectedTypeId, selectedBrandId, description, values)}>Зберегти товар</button>
+        <button className='myBtn createBtn' onClick={handleSubmit}>Зберегти товар</button>
       </div>
       <Row className='mt-2'>
         <Col xl={6} sm={9} xs={8} className={lessThan1200 ? "" : ""}>
           <div className="form-floating mb-3 deviceCreateForm" data-bs-theme="light">
-            <input type="text" className="form-control" placeholder="Назва" value={name} onChange={e => setName(e.target.value)}></input>
+            <input type="text" className={invClass.name} placeholder="Назва" value={name} onChange={e => setName(e.target.value)}></input>
             <label htmlFor="floatingInput">Назва</label>
           </div>
+          {errors.name &&
+            <p className="erText">
+              {errors.name}
+            </p>
+          }
         </Col>
         <Col xl={1} sm={3} xs={4} className={lessThan1200 ? "" : ""}>
           <div className="form-floating mb-3 deviceCreateForm" data-bs-theme="light">
-            <input type="text" className="form-control" placeholder="Ціна" value={price} onChange={e => setPrice(e.target.value)}></input>
+            <input type="text" className={invClass.price} placeholder="Ціна" value={price} onChange={e => setPrice(e.target.value)}></input>
             <label htmlFor="floatingInput">Ціна</label>
           </div>
+          {errors.price &&
+            <p className="erText">
+              {errors.price}
+            </p>
+          }
         </Col>
         <Col xl={5} className={lessThan1200 ? "order-3 mt-3" : ""}>
           <Form.Group controlId="formFileMultiple" className="mb-3">
             <Form.Label>Картинка товару</Form.Label>
-            <Form.Control type="file" multiple onChange={handleImageChange}/>
+            <Form.Control type="file" className={invClass.imgs} multiple onChange={handleImageChange}/>
           </Form.Group>
+          {errors.imgs &&
+            <p className="erText">
+              {errors.imgs}
+            </p>
+          }
         </Col>
         <Col xl={4} md={6} xs={7} style={{height: '100px'}} className={lessThan1200 ? "" : ""}>
           <Form.Group as={Col} controlId="formGridState" className='formOptions'>
             <Form.Label>Категорія</Form.Label>
-            <Form.Select defaultValue="Оберіть категорію" onChange={e => setSelectedTypeId(e.target.value)}>
+            <Form.Select defaultValue="Оберіть категорію" className={invClass.category} onChange={e => setSelectedTypeId(e.target.value)}>
               <option value={""}>Оберіть категорію...</option>
               {!loading && types.map((type, index) => (
                 <option value={type._id} key={index}>{type.name}</option>
               ))}
             </Form.Select>
           </Form.Group>
+          {errors.category &&
+            <p className="erText">
+              {errors.category}
+            </p>
+          }
         </Col>
         <Col xl={3} md={6} xs={5} className={lessThan1200 ? "" : ""}>
           <Form.Group as={Col} controlId="formGridState" className='formOptions'>
             <Form.Label>Бренд</Form.Label>
-            <Form.Select defaultValue="Оберіть категорію" onChange={e => setSelectedBrandId(e.target.value)}>
+            <Form.Select defaultValue="Оберіть бренд" className={invClass.brand} onChange={e => setSelectedBrandId(e.target.value)}>
               <option value={""}>Оберіть бренд...</option>
               {!loadingBrands && brands.map((brand, index) => (
                 <option value={brand._id} key={index}>{brand.name}</option>
               ))}
             </Form.Select>
           </Form.Group>
+          {errors.brand &&
+            <p className="erText">
+              {errors.brand}
+            </p>
+          }
         </Col>
         <Col xl={5} style={{height: '100px'}} className={lessThan1200 ? "imageCol order-4" : ""}>
           {imgs.length > 0 && (

@@ -6,10 +6,11 @@ import "../../css/components/myBtn.css"
 import heart from "../../css/imgs/heart.png"
 import scales from "../../css/imgs/scales.svg"
 import { useMediaPredicate } from "react-media-hook";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Loader from '../../components/loader.jsx';
 import { TransformWrapper, TransformComponent} from 'react-zoom-pan-pinch';
-import fetchOneDevice from "../../components/axios-components/fetchOneDevice.jsx";
+import fetchOneDevice from "../../components/axios-components/devices/fetchOneDevice.jsx";
+import fetchOneType from "../../components/axios-components/types/fetchOneType.jsx";
 
 const Device = () => {
 
@@ -19,22 +20,33 @@ const Device = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const { id } = useParams();
   const [device, setDevice] = useState({info: []});
-  const [isLoading, setIsLoading] = useState(true);
+  const [type, setType] = useState();
+  const [isLoading1, setIsLoading1] = useState(true);
+  const [isLoading2, setIsLoading2] = useState(true);
 
   useEffect(() => {
     fetchOneDevice(id)
       .then(data => {
         setDevice(data);
         setSelectedImage(import.meta.env.VITE_API_URL + '/' + data.imgs[0]);
-        setIsLoading(false);
+        setIsLoading1(false);
       })
-  }, []);
+  }, [id]);
 
-  if (isLoading) {
+  useEffect(() => {
+    if (device && device.typeId) {
+      fetchOneType(device.typeId).then((data) => {
+        setType(data);
+        setIsLoading2(false);
+      })
+    }
+  }, [device])
+
+
+  if (isLoading1 || isLoading2 || isLoading1 && isLoading2) {
     return <Loader />; 
   }
 
-  console.log(device);
   const images = device.imgs.map((img) => import.meta.env.VITE_API_URL + '/' + img)
   const price = device.price
   const name =  device.name
@@ -45,8 +57,8 @@ const Device = () => {
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="/">Головна</a></li>
-          <li className="breadcrumb-item"><a href="#">Материнські плати</a></li>
-          <li className="breadcrumb-item active" aria-current="page">Asus</li>
+          <li className="breadcrumb-item"><Link to={`/devices/type/${type._id}`}>{type.name}</Link></li>
+          <li className="breadcrumb-item active" aria-current="page">{device.name}</li>
         </ol>
       </nav>
 
@@ -65,7 +77,7 @@ const Device = () => {
       <div id="about"></div>
       <div className="deviceContainer">
         <Row>
-          <Col xl={5} style={{padding: "0 20px"}}>
+          <Col xl={5} md={6} style={{padding: "0 20px"}}>
             <div className="imageContainer">
               <div>
                 <TransformWrapper
@@ -101,7 +113,7 @@ const Device = () => {
               </div>}
             </div>
           </Col>
-          <Col xl={7}> 
+          <Col xl={7} md={6}> 
             <Row>
               {!lessThan1200 && <Col xl={6}>
                 <div className="devicePanelBg mainCharacteristicsPanel" >
@@ -110,20 +122,20 @@ const Device = () => {
                   </Row>
                 </div>
               </Col>}
-              <Col xl={6}><div className="devicePanelBg">
+              <Col xl={6} md={12}><div className="devicePanelBg">
                 <div className="deviceMainActions">
                   <Row>
-                    <Col xl={7} sm={7}><p className="price">{price}<span> ₴</span></p></Col>
-                    <Col xl={5} sm={5} className="statusCol"><div className="status"><p>У наявності</p></div></Col>
-                    <Col xl={12} sm={12}><div className="center"><button className="myBtn basketAdd">Додати до кошика</button></div></Col>
-                    <Col xl={12} sm={12}><div className="buttonsGroup">
+                    <Col xl={7} md={7} sm={7}><p className="price">{price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')}<span> ₴</span></p></Col>
+                    <Col xl={5} md={5} sm={5} className="statusCol"><div className="status"><p>У наявності</p></div></Col>
+                    <Col xl={12} md={12} sm={12}><div className="center"><button className="myBtn basketAdd">Додати до кошика</button></div></Col>
+                    <Col xl={12} md={12} sm={12}><div className="buttonsGroup">
                       <button className="favoriteBtn"><Image src={heart} alt="heart" /></button>
                       <button className="favoriteBtn"><Image src={scales} alt="scales" /></button>
                     </div></Col>
                   </Row>
                 </div></div>
               </Col>
-              {device.description && <Col xl={12} className="descriptionCol">
+              {device.description && <Col xl={12} sm={12} md={12} className="descriptionCol">
                 <div id="description"></div>
                 <div className="devicePanelBg">
                   <div className="descriptionContainer">

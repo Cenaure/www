@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { registrationPost } from '../axios-components/registrationPost';
+import { registrationPost } from '../axios-components/user/registrationPost';
 
 const registrationValidation = (name, surname, email, password, confirmPassword, context, handleClose) => {
   let errors = {}

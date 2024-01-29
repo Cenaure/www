@@ -3,7 +3,7 @@ import '../../css/components/Admin/devicePageTypesList.css'
 import '../../css/components/General/panel.css'
 import { Row, Col} from 'react-bootstrap';
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
-import fetchTypes from '../axios-components/fetchTypes';
+import fetchTypes from '../axios-components/types/fetchTypes';
 import { motion } from 'framer-motion';
 
 const DevicePageTypesList = () => {

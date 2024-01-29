@@ -4,7 +4,7 @@ import "../css/components/General/acountDropdown.css"
 import { Nav } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite';
 import { Context } from '../main.jsx';  
-import logoutPost from './axios-components/logoutPost.jsx'
+import logoutPost from './axios-components/user/logoutPost.jsx'
 import { useNavigate, Link } from 'react-router-dom';
 
 const DropdownAcount = observer(({setDropdownAcountOpen}) => {
