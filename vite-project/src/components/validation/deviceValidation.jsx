@@ -1,7 +1,8 @@
-import validator from 'validator';
 import createDevice from '../axios-components/devices/createDevice';
+import changeDevice from '../axios-components/devices/changeDevice';
 
-const deviceValidation = (name, price, imgs, selectedTypeId, selectedBrandId, description, values) => {
+const deviceValidation = async (name, price, imgs, selectedTypeId, selectedBrandId, description, values, id) => {
+  console.log(values)
   let errors = {}
   let invClass = {
     name: "form-control",
@@ -27,7 +28,8 @@ const deviceValidation = (name, price, imgs, selectedTypeId, selectedBrandId, de
     errors.brand = "Не вказан бренд";
     invClass.brand = "form-control erInput"
   } else{
-    createDevice(name, price, imgs, selectedTypeId, selectedBrandId, description, values)
+    if(!id) await createDevice(name, price, imgs, selectedTypeId, selectedBrandId, description, values)
+    else await changeDevice(name, price, imgs, selectedTypeId, selectedBrandId, description, values, id)
   }
   return [errors, invClass];
 }

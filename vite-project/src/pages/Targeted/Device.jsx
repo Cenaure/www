@@ -9,56 +9,51 @@ import { useMediaPredicate } from "react-media-hook";
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../../components/loader.jsx';
 import { TransformWrapper, TransformComponent} from 'react-zoom-pan-pinch';
-import fetchOneDevice from "../../components/axios-components/devices/fetchOneDevice.jsx";
 import fetchOneType from "../../components/axios-components/types/fetchOneType.jsx";
-
+import { Context } from "../../main.jsx";
+import addToCart from "../../components/axios-components/cart/addToCart.jsx";
 const Device = () => {
-
-
-
   const lessThan1200 = useMediaPredicate("(max-width: 1200px)");
   const [selectedImage, setSelectedImage] = useState(null);
   const { id } = useParams();
-  const [device, setDevice] = useState({info: []});
-  const [type, setType] = useState();
+  const {device, type, basket, user} = useContext(Context)
+  const [deviceOnPage, setDeviceOnPage] = useState({info: []});
+  const [typeById, setTypeById] = useState();
   const [isLoading1, setIsLoading1] = useState(true);
-  const [isLoading2, setIsLoading2] = useState(true);
 
   useEffect(() => {
-    fetchOneDevice(id)
-      .then(data => {
-        setDevice(data);
-        setSelectedImage(import.meta.env.VITE_API_URL + '/' + data.imgs[0]);
-        setIsLoading1(false);
-      })
+    const device2 = device._devices.rows.filter(d => d._id === id);
+
+    if (device2.length > 0) {
+      setDeviceOnPage(device2[0]);
+      setSelectedImage(import.meta.env.VITE_API_URL + '/' + device2[0].imgs[0]);
+      setTypeById((type._types.filter(t => t._id == device2[0].typeId))[0])
+    }
+    setIsLoading1(false);
   }, [id]);
 
-  useEffect(() => {
-    if (device && device.typeId) {
-      fetchOneType(device.typeId).then((data) => {
-        setType(data);
-        setIsLoading2(false);
-      })
-    }
-  }, [device])
-
-
-  if (isLoading1 || isLoading2 || isLoading1 && isLoading2) {
+  if (isLoading1) {
     return <Loader />; 
   }
 
-  const images = device.imgs.map((img) => import.meta.env.VITE_API_URL + '/' + img)
-  const price = device.price
-  const name =  device.name
-  const firstFourAttributes = device.attributes.slice(0, 4);
+  const images = deviceOnPage.imgs.map((img) => import.meta.env.VITE_API_URL + '/' + img)
+  const price = deviceOnPage.price
+  const name =  deviceOnPage.name
+  const firstFourAttributes = deviceOnPage.attributes.slice(0, 4);
+
+  const handleAddToCart = async () => {
+    await addToCart(deviceOnPage._id, 1, user._user.id)
+    basket.updateBasket(user._user.id)
+    basket.setOpen(true)
+  }
 
   return(
     <Container fluid>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="/">Головна</a></li>
-          <li className="breadcrumb-item"><Link to={`/devices/type/${type._id}`}>{type.name}</Link></li>
-          <li className="breadcrumb-item active" aria-current="page">{device.name}</li>
+          <li className="breadcrumb-item"><Link to={`/devices/type/${typeById._id}`}>{typeById.name}</Link></li>
+          <li className="breadcrumb-item active" aria-current="page">{deviceOnPage.name}</li>
         </ol>
       </nav>
 
@@ -98,7 +93,7 @@ const Device = () => {
                   </div>)}
                 </TransformWrapper>
               </div>
-              {device.imgs.length != 1 && <div className="choiseImagesContainer">
+              {deviceOnPage.imgs.length != 1 && <div className="choiseImagesContainer">
                 {images.map((image, index) => (
                   <Image
                     key={index}
@@ -127,7 +122,7 @@ const Device = () => {
                   <Row>
                     <Col xl={7} md={7} sm={7}><p className="price">{price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')}<span> ₴</span></p></Col>
                     <Col xl={5} md={5} sm={5} className="statusCol"><div className="status"><p>У наявності</p></div></Col>
-                    <Col xl={12} md={12} sm={12}><div className="center"><button className="myBtn basketAdd">Додати до кошика</button></div></Col>
+                    <Col xl={12} md={12} sm={12}><div className="center"><button className="myBtn basketAdd" onClick={() => handleAddToCart()}>Додати до кошика</button></div></Col>
                     <Col xl={12} md={12} sm={12}><div className="buttonsGroup">
                       <button className="favoriteBtn"><Image src={heart} alt="heart" /></button>
                       <button className="favoriteBtn"><Image src={scales} alt="scales" /></button>
@@ -135,13 +130,13 @@ const Device = () => {
                   </Row>
                 </div></div>
               </Col>
-              {device.description && <Col xl={12} sm={12} md={12} className="descriptionCol">
+              {deviceOnPage.description && <Col xl={12} sm={12} md={12} className="descriptionCol">
                 <div id="description"></div>
                 <div className="devicePanelBg">
                   <div className="descriptionContainer">
                     <h2>Опис товару</h2>
                     <div className="descriptionPanel">
-                      {device.description}
+                      {deviceOnPage.description}
                     </div>
                   </div>
                 </div>
@@ -154,7 +149,7 @@ const Device = () => {
             <div className="devicePanelBg">
               <div className="characteristics">
                 <h4>Характеристики <p className="name">{name}</p></h4>
-                {device.attributes.map((attribute) => 
+                {deviceOnPage.attributes.map((attribute) => 
                 <div className="characteristicsElement" key={attribute._id}>
                   <p>{attribute.name}</p>
                   <p>{attribute.value}</p>
@@ -165,7 +160,7 @@ const Device = () => {
           <Col xl={12} sm={12}>
             <div id="reviews"></div>
             <div className="feedbacks">
-              <h3>Відгуки та питання</h3>
+              <noscript><h3>Відгуки та питання</h3></noscript>
             </div>
           </Col>
         </Row>

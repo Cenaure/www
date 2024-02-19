@@ -1,15 +1,18 @@
 import {makeAutoObservable} from "mobx";
+import fetchBrands from "../components/axios-components/brands/fetchBrands";
 
 export default class brandStore {
     constructor(){
-        this._brands = [
-            {id: 1, name: 'b1'},
-            {id: 2, name: 'b2'}
-        ]
+        this._brands = []
         makeAutoObservable(this);
     }
 
     setBrands(brands){ this._brands = brands; }
 
-    get Brands() { return this._brands; }
+    get brands() { return this._brands; }
+
+    async updateBrands() {
+        const brands = await fetchBrands();
+        this.setBrands([...brands])
+    }
 }

@@ -83,13 +83,13 @@ nav{
   transform: translateY(-8px) rotate(-45deg);
 }
 
-@media(max-width: 700px) {
+@media(max-width: 768px) {
   .menu {
     position: fixed;
     left: -100%;
-    top: 59px;
-    gap: 0;
+    top: 60px;
     width: 100%;
+    justify-content: start;
     height: 100%;
     background-color: rgb(24, 24, 27);
     text-align: center;
@@ -103,11 +103,11 @@ nav{
   }
 
   .navbar-links{
-    margin-top: 3em;
+    padding: 0;
   }
   .navbar-links li{
     display: block;
-    margin-top: 3em;
+    margin-top: 2em;
     font-size: 22px;
   }
 }

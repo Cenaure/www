@@ -1,0 +1,62 @@
+.devicesPageFiltersAndDevicesGrid{
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 10px;
+}
+
+@media (max-width: 1355px) {
+  .devicesPageFiltersAndDevicesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modalFilters{
+  margin-top: 20px;
+  position: absolute;
+  background-color: white;
+  z-index: 2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 10px black;
+  box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease; 
+}
+
+.visible{
+  opacity: 1;
+  display: flex;
+  visibility: visible;
+}
+
+.paginationContainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.paginationContainer .searchField {
+  width: 40%;
+}
+
+.paginationContainer button {
+  margin-right: 1px;
+}
+
+.paginationContainer *{
+  margin: 0;
+}
+
+@media (max-width: 954px){
+  .paginationContainer{
+    flex-direction: column;
+    align-items: center;
+  }
+  .paginationContainer .searchField {
+    width: 100%;
+  }
+}

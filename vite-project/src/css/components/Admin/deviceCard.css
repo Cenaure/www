@@ -1,5 +1,5 @@
 .deviceCardContainer {
-  height: 5rem;
+  height: 5rem !important;
   display: flex;
   margin-top: 10px;
 }
@@ -29,12 +29,13 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border: 1px solid #e64e4e;
   border-radius: 50%;
   position: relative;
   outline: none;
+  cursor: pointer;
 }
 
 .deviceCardLeftCol input:before {
@@ -42,8 +43,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 13px;
-  height: 13px;
+  width: 100%;
+  height: 100%;
   background: #e45c5c;
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(0);
@@ -51,5 +52,34 @@
 }
 
 .deviceCardLeftCol input:checked:before {
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+.elementsGrid {
+  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.deviceName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: clamp(200px, 50vw, 90vw);
+}
+
+@media (max-width: 354px) {
+  .deviceName{
+    padding: 5;
+  }
+  .row .col-sm-2{
+    padding: 0;
+  }
+  .row .col-sm-10{
+    padding: 0;
+  }
+  .deviceName{
+    min-width: 0;
+    width: 50vw;
+  } 
 }

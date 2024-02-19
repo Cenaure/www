@@ -10,5 +10,6 @@ router.get('/:id', DeviceController.getById);
 router.delete('/delete', checkRole('ADMIN'), DeviceController.deleteDevices);
 router.post('/:deviceId/attributes/:attributeId', checkRole('ADMIN'), attributeDeviceController.createAttribute);
 router.put('/:deviceId/attributes/:attributeId', checkRole('ADMIN'), attributeDeviceController.updateAttribute);
+router.put('/:id', checkRole('ADMIN'), DeviceController.updateDevice);
 
 module.exports = router;

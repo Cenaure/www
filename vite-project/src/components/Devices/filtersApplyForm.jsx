@@ -1,10 +1,10 @@
 import React from 'react';
 
-const FiltersApply = ({count}) => {
+const FiltersApply = ({count, filterProductsByAttributes}) => {
   return(
-    <div>
-      <span>{count} фільтрів</span>
-      <button onClick={() => {/* Apply filters */}}>Застосувати</button>
+    <div className='FiltersDropdown'>
+      <p style={{margin: 0}}>{count} фільтрів</p>
+      <button onClick={filterProductsByAttributes}>Застосувати</button>
     </div>
   )
 }

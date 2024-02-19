@@ -2,7 +2,7 @@ const Device = require('../models/device-model');
 const ApiError = require('../error/api-error');
 const uuid = require('uuid')
 const path = require('path');
-
+const fs = require('fs');
 class DeviceController {
     async create(req, res, next) {
         try {
@@ -10,7 +10,7 @@ class DeviceController {
     
             const existingDevice = await Device.findOne({ name });
             if (existingDevice) {
-                next(ApiError.badRequest(error.message));
+                next(ApiError.badRequest("Товар з такою назвою вже існує"));
             }
     
             let fileNames = [];
@@ -46,7 +46,7 @@ class DeviceController {
             if (!brandId && !typeId) {
                 devices = await Device.find().limit(limit).skip(offset).exec();
                 totalCount = await Device.countDocuments().exec();
-            } else if (brandId && !typeId) {
+            } /*else if (brandId && !typeId) {
                 devices = await Device.find({ brandId }).limit(limit).skip(offset).exec();
                 totalCount = await Device.countDocuments({ brandId }).exec();
             } else if (!brandId && typeId) {
@@ -55,7 +55,7 @@ class DeviceController {
             } else {
                 devices = await Device.find({ typeId, brandId }).limit(limit).skip(offset).exec();
                 totalCount = await Device.countDocuments({ typeId, brandId }).exec();
-            }
+            }*/
         
             return res.json({ count: totalCount, rows: devices });
         } catch (error) {
@@ -79,11 +79,40 @@ class DeviceController {
     async deleteDevices(req, res, next){
         try {
             const { deviceIds } = req.body;
-
+    
+            const devicesToDelete = await Device.find({ _id: { $in: deviceIds } });
+    
             const result = await Device.deleteMany({ _id: { $in: deviceIds } });
-
+    
+            devicesToDelete.forEach(device => {
+                device.imgs.forEach(image => {
+                    const imagePath = path.join(__dirname, '..', 'static', image);
+                    fs.unlink(imagePath, err => {
+                        if (err) {
+                            console.error(`Failed to delete image ${image}: ${err}`);
+                        }
+                    });
+                });
+            });
+    
             res.json({ success: true, deletedCount: result.deletedCount });
         } catch(error) {
+            next(ApiError.internal(error.message));
+        }
+    }
+
+    async updateDevice(req, res, next) {
+        try {
+            const { id } = req.params;
+            const updatedItem = req.body;
+            const device = await Device.findByIdAndUpdate(id, updatedItem, { new: true });
+
+            if (!device) {
+                return next(ApiError.internal(`Товар за айді ${id} не знайдено`));
+            }
+
+            return res.json(device);
+        } catch (error) {
             next(ApiError.internal(error.message));
         }
     }

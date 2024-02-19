@@ -14,7 +14,7 @@
 .attributesPanel {
   margin-top: 20px;
   display: grid !important;
-  grid-template-columns: 100%;
+  grid-template-columns: 1fr;
 }
 
 .attributeElement {
@@ -27,6 +27,15 @@
   border-radius: 10px;
 }
 
+@media (max-width: 434px){
+  .attributeElement{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .attributeElement .form-select{
+    width: 100% !important;
+  }
+}
 .attributeName {
   text-align: center;
   display: flex;

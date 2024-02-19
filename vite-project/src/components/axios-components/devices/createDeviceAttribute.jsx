@@ -3,6 +3,7 @@ import instance from "../../../http";
 
 const createDeviceAttribute = async (deviceId, attributeId, value) => {
   try {
+    console.log(deviceId, attributeId, value)
     const {data} = await instance.post(`${API_URL}/device/${deviceId}/attributes/${attributeId}`, {
       value: value
     })

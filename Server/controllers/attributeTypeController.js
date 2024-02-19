@@ -22,24 +22,31 @@ class AttributeTypeController {
 
   async updateAttribute(req, res, next) {
     const { typeId, attributeId } = req.params;
-    const { name, value } = req.body;
+    const { name, values } = req.body;
     try {
       const productType = await Type.findById(typeId);
+
       if (!productType) {
-        return ApiError.badRequest('Категорія не знайдена');
+        return next(ApiError.badRequest('Категорія не знайдена'));
       }
-      const attribute = productType.attributes.id(attributeId);
+      
+      let attribute = productType.attributes.id(attributeId);
+    
       if (!attribute) {
-        return ApiError.badRequest('Характеристика не знайдена');
+        productType.attributes.push({ name, values });  
+      } else {
+        attribute.name = name;
+        attribute.values = values;
       }
-      attribute.name = name;
-      attribute.values = values;
       await productType.save();
       res.send({ message: 'Характеристика оновлена' });
     } catch (err) {
       next(ApiError.internal(err.message));
     }
   }
+
+
+
 
   async deleteAttribute(req, res, next) {
     const { typeId, attributeId } = req.params;

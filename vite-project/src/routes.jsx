@@ -9,11 +9,14 @@ import { adminRoute, basketRoute, mainRoute, deviceRoute, aboutUsRoute, typesRou
 import Acount from "./pages/Targeted/Acount";
 import Devices from "./pages/Main/DevicesList";
 
-export const authRoutes = [
+export const adminRoutes = [
     {
         path: adminRoute,
         element: Admin
-    },
+    }
+]
+
+export const authRoutes = [
     {
         path: basketRoute,
         element: Basket

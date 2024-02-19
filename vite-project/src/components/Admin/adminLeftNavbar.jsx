@@ -6,7 +6,7 @@ import { useMediaPredicate } from "react-media-hook";
 
 const AdminLeftNavbar = () => {
 
-  const lessThan700 = useMediaPredicate("(max-width: 700px)");
+  const lessThan700 = useMediaPredicate("(max-width: 768px)");
 
   const [burgerClass, setBurgerClass] = useState("line unclicked");
   const [menuClass, setMenuClass] = useState("adminMenu hidden");
@@ -43,6 +43,24 @@ const AdminLeftNavbar = () => {
             onClick={updateMenu}
           >
             Товари
+          </NavLink>
+        </Col> 
+        <Col xl={12}>
+          <NavLink 
+            to="/admin/categories" 
+            className={"adminNavBtn"}
+            onClick={updateMenu}
+          >
+            Категорії
+          </NavLink>
+        </Col>
+        <Col xl={12}>
+          <NavLink 
+            to="/admin/brands" 
+            className={"adminNavBtn"}
+            onClick={updateMenu}
+          >
+            Бренди
           </NavLink>
         </Col>
         <Col xl={12}>

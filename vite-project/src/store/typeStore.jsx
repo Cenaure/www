@@ -1,15 +1,18 @@
 import {makeAutoObservable} from "mobx";
+import fetchTypes from "../components/axios-components/types/fetchTypes";
 
 export default class typeStore {
     constructor(){
-        this._types = [
-            {id: 1, name: 't1'},
-            {id: 2, name: 't2'}
-        ]
+        this._types = []
         makeAutoObservable(this);
     }
 
     setTypes(types){ this._types = types; }
 
-    get Types() { return this._types; }
+    get types() { return this._types; }
+
+    async updateTypes() {
+        const types = await fetchTypes();
+        this.setTypes([...types])
+    }    
 }

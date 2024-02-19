@@ -11,18 +11,59 @@
   padding: 8px 25px;
 }
 
+@media (max-width: 576px){
+  .createBtn{
+    font-size: 0.85em;
+  }
+}
 .createBtn:hover {
   background-color: rgb(36, 36, 41);
 }
 
 .devicesPageNav {
-  width: 100%;
+  max-width: 100%;
   display: flex;  
   justify-content: space-between;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 439px){
+  .deviceslist{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .deviceslist .createBtn {
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .deviceslist :first-child {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+  }
+}
+
+
+@media (max-width: 768px) {
   .adminContent {
     grid-template-columns: 1fr;
   }
+}
+
+.alertContainer {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 50px;
+  width: 200%;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+  transition: opacity 0.1s ease, visibility 0.1s ease; 
+}
+
+.alertContainer * {
+  border-radius: 50px !important;
 }

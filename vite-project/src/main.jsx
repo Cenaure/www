@@ -7,16 +7,25 @@ import brandStore from './store/brandStore';
 import typeStore from './store/typeStore';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import serverError from './store/serverErrorStore.jsx';
+import basketStore from './store/basketStore.jsx';
 
 export const Context = createContext(null);
 
+const user = new userStore();
+const device = new deviceStore();
+const brand = new brandStore();
+const type = new typeStore();
+const basket = new basketStore();
+const server = new serverError();
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Context.Provider value = {{
-      user: new userStore(),
-      device: new deviceStore(),
-      brand: new brandStore(),
-      type: new typeStore(),
-      server: new serverError()
+      user,
+      device,
+      brand,
+      type,
+      basket,
+      server
     }}>
     <React.StrictMode>
       <App />

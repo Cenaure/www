@@ -9,4 +9,5 @@
     align-items: center;
     justify-content: center;
     z-index: 4;
+    position: fixed;
 }

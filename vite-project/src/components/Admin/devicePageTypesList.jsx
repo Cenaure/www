@@ -1,48 +1,58 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import '../../css/components/Admin/devicePageTypesList.css'
 import '../../css/components/General/panel.css'
-import { Row, Col} from 'react-bootstrap';
-import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
-import fetchTypes from '../axios-components/types/fetchTypes';
-import { motion } from 'framer-motion';
+import { Row, Col, Form} from 'react-bootstrap';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Context } from '../../main';
+import { observer } from 'mobx-react-lite';
 
 const DevicePageTypesList = () => {
-  
+  const {type} = useContext(Context)
   const [types, setTypes] = useState({info: []});
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const {id} = useParams()
+  const [selectedType, setSelectedType] = useState(id && type._types.filter(t => t._id === id)[0]._id)
 
   useEffect(() => {
-    fetchTypes()
-      .then(data => {
-        setTypes(data)
-        setLoading(false)
-      })
-  }, []);
+    setTypes(type._types)
+    setLoading(false)
+  }, [type._types]);
 
+  useEffect(() => {
+    if(id) setSelectedType(type._types.filter(t => t._id === id)[0]._id)
+    else setSelectedType("")
+  }, [id])
+
+  useEffect(() => {
+    if(selectedType) navigate(`/admin/devices/type/${selectedType}`)
+    if(selectedType == "") navigate('/admin/devices')
+  }, [selectedType])
+ 
   if(loading) return <></>
-
   return (
-    <motion.div className="devicePageTypesList panel" initial={{ y: 100 }} animate={{ y: 0 }} transition={{ duration: 0.2 }}>
+    <div className="devicePageTypesList mt-3">
       <Row>
         <Col xl={12}>
-          <div style={{textAlign: "center"}}><h3>Категорії</h3></div>
-          {location.pathname != '/admin/devices' && <div style={{textAlign: 'center', textDecoration: 'underline'}}><Link to="/admin/devices">Очистити</Link></div>}
+          <div style={{textAlign: "left"}}><h6 style={{color: 'grey'}} className='mt-1 mb-1'>Категорії</h6></div>
+          
+          {location.pathname != '/admin/devices' && <div style={{textAlign: 'left', textDecoration: 'underline'}} className='mb-1 mt-0'><Link to="/admin/devices">Очистити</Link></div>}
         </Col> 
-        {!loading && types.map((type) => (
-          <Col xl={12} key={type._id}>
-            <NavLink to={`type/${type._id}`}><div className="listElement">{type.name}</div></NavLink>
-          </Col> 
-        ))}
         <Col xl={12}>
-          <div style={{display: 'flex', width: '100%', justifyContent: 'center', marginTop: '20px'}}>
-            <button className='myBtn createBtn' onClick={() => navigate('/admin/types/create')}>Створити категорію</button>
+          <div>
+            <Form.Select defaultValue={""} value={selectedType} 
+            onChange={e => setSelectedType(e.target.value)} style={{width: '15rem'}}>
+              <option value="">{ "Оберіть значення..." }</option>
+              {!loading && types.map((type, index) => (
+                <option value={type._id} key={index}>{type.name}</option>
+              ))}
+            </Form.Select>
           </div>
-        </Col>
+        </Col> 
       </Row>
-    </motion.div>
+    </div>
   )
 }
  
-export default DevicePageTypesList;
+export default observer(DevicePageTypesList);

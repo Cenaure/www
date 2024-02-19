@@ -23,7 +23,7 @@ class UserService {
         const activationLink = uuid.v4();
 
         const user = await UserModel.create({firstName, secondName, email, password: hashPassword, role, activationLink})
-        const basket = await Basket.create({userId: user.id})
+        //const basket = await Basket.create({userId: user.id})
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`);
 
         return this.generateAndSaveTokens(user);

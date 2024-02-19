@@ -1,0 +1,27 @@
+.navBrands{
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalBrandCreation{
+  margin-top: 20px;
+  right: 10px;
+  position: absolute;
+  background-color: white;
+  z-index: 2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 10px black;
+  box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease; 
+}
+
+.visible{
+  opacity: 1;
+  display: flex;
+  visibility: visible;
+}

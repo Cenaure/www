@@ -6,3 +6,9 @@
   position: absolute;
   z-index: 2;
 }
+
+@media (max-width: 425px){
+  .pageContainer{
+    padding: 2px;
+  }
+}

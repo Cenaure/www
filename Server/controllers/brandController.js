@@ -27,6 +27,34 @@ class BrandController {
             res.status(500).json({ message: 'Internal Server Error' });
         }
     }
+
+    async deleteBrands(req, res, next){
+        try {
+            const { brandIds } = req.body;
+
+            const result = await Brand.deleteMany({ _id: { $in: brandIds } });
+
+            res.json({ success: true, deletedCount: result.deletedCount });
+        } catch(error) {
+            next(ApiError.internal(error.message));
+        }
+    }
+
+    async updateBrand(req, res, next) {
+        try {
+            const {id} = req.params
+            const {name} = req.body
+
+            const brand = await Brand.findById(id)
+
+            brand.name = name
+
+            brand.save()
+            res.json(brand)
+        } catch (error) {
+            next(ApiError.internal(error.message))
+        }
+    }
 }
 
 module.exports = new BrandController

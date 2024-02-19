@@ -2,7 +2,7 @@
   position: relative;
   height: auto;
   width: 250px;
-  height: 88vh;
+  height: 115vh;
   background-color: rgb(20, 20, 23);
   color: white;
 }
@@ -65,7 +65,7 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .adminNavBg {
     padding: 10px 0;
     width: 100%;
@@ -78,7 +78,7 @@
   .adminMenu {
     position: fixed;
     left: -100%;
-    top: 108px;
+    top: 190px;
     gap: 0;
     width: 100%;
     height: 100%;
