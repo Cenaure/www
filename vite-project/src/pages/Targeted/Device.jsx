@@ -51,7 +51,7 @@ const Device = () => {
     <Container fluid>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a href="/">Головна</a></li>
+          <li className="breadcrumb-item"><Link to='/'>Головна</Link></li>
           <li className="breadcrumb-item"><Link to={`/devices/type/${typeById._id}`}>{typeById.name}</Link></li>
           <li className="breadcrumb-item active" aria-current="page">{deviceOnPage.name}</li>
         </ol>

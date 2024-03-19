@@ -8,6 +8,7 @@ import typeStore from './store/typeStore';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import serverError from './store/serverErrorStore.jsx';
 import basketStore from './store/basketStore.jsx';
+import orderStore from './store/orderStore.jsx';
 
 export const Context = createContext(null);
 
@@ -17,6 +18,7 @@ const brand = new brandStore();
 const type = new typeStore();
 const basket = new basketStore();
 const server = new serverError();
+const order = new orderStore();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Context.Provider value = {{
@@ -25,7 +27,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       brand,
       type,
       basket,
-      server
+      server,
+      order
     }}>
     <React.StrictMode>
       <App />

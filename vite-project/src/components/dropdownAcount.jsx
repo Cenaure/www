@@ -6,8 +6,8 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '../main.jsx';  
 import logoutPost from './axios-components/user/logoutPost.jsx'
 import { useNavigate, Link } from 'react-router-dom';
-
-const DropdownAcount = observer(({setDropdownAcountOpen}) => {
+import { motion } from 'framer-motion';
+const DropdownAcount = observer(({setDropdownAcountOpen, dropdownAcountOpen}) => {
 
   const context = useContext(Context);
 
@@ -19,13 +19,23 @@ const DropdownAcount = observer(({setDropdownAcountOpen}) => {
     
   }
 
+  const variants = {
+    open: { y: -20 },
+    closed: { y: 0 },
+  }
+
   return(
-    <div className="myDropdown acountDropdown">
+    <motion.div className="myDropdown acountDropdown"
+        initial="closed"
+        animate={dropdownAcountOpen ? "open" : "closed"}
+        variants={variants}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
       <div className='myDropdownContent'>
-        <Link to="/acount">Налаштування</Link>
-        <Nav.Link className='mt-3' onClick={() => logout()}>Вихід</Nav.Link>
+        <noscript><Link to="/acount">Налаштування</Link></noscript>
+        <Nav.Link className='' onClick={() => logout()}>Вихід</Nav.Link>
       </div>
-    </div>
+    </motion.div>
   );
 })
  

@@ -34,9 +34,20 @@ class CartController {
       res.status(200).json(cart);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Ошибка сервера' });
+      res.status(500).json({ message: 'Помилка сервера' });
     }
   };
+
+
+  async createCart(req, res, next) {
+    try {
+      const newCart = new Cart();
+      await newCart.save();
+      return res.json(newCart);
+    } catch (error) {
+      next(ApiError.internal(error))
+    }
+  }
 
   async getCart(req, res) {
     try {
@@ -45,13 +56,17 @@ class CartController {
       const cart = await Cart.findOne({ userId: userId.userId });
   
       if (!cart) {
-        return res.status(404).json({ message: 'Корзина не найдена' });
+        const newCart = new Cart({
+          userId: {_id: userId.userId}
+        });
+        await newCart.save();
+        return res.status(201).json(newCart);
       }
   
       res.status(200).json(cart);
     } catch (error) { 
       console.error(error);
-      res.status(500).json({ message: 'Ошибка сервера' });
+      res.status(500).json({ message: 'Помилка сервера' });
     }
   };
 
@@ -61,7 +76,7 @@ class CartController {
       const cart = await Cart.findOne({ userId: userId });
       
       if (!cart) {
-        return res.status(404).json({ message: 'Корзина не найдена' });
+        return res.status(404).json({ message: 'Корзину не знайдено' });
       }
       const itemIndex = cart.items.findIndex(item => item.product.toString() === itemId);
       if (itemIndex === -1) {
@@ -82,7 +97,7 @@ class CartController {
       const cart = await Cart.findOne({ userId: userId });
       
       if (!cart) {
-        return res.status(404).json({ message: 'Корзина не найдена' });
+        return res.status(404).json({ message: 'Корзину не знайдено' });
       }
       const itemIndex = cart.items.findIndex(item => item.product.toString() === itemId);
       if (itemIndex === -1) {
@@ -95,7 +110,7 @@ class CartController {
       }
       
       await cart.save();
-      return res.status(200).json({ message: 'Количество товара уменьшено' });
+      return res.status(200).json({ message: 'К-сть товару зменшена' });
     } catch (error) {
       next(ApiError.internal(error.message))
     }
@@ -107,7 +122,7 @@ class CartController {
       const cart = await Cart.findOne({ userId: userId });
 
       if (!cart) {
-        return res.status(404).json({ message: 'Корзина не найдена' });
+        return res.status(404).json({ message: 'Корзину не знайдено' });
       }
       const itemIndex = cart.items.findIndex(item => item.product.toString() === itemId);
       if (itemIndex === -1) {
@@ -120,11 +135,30 @@ class CartController {
       }
       
       await cart.save();
-      return res.status(200).json({ message: 'Количество товара уменьшено' });
+      return res.status(200).json({ message: 'К-сть товара збільшено' });
     } catch (error) {
       next(ApiError.internal(error.message))
     }
   }  
+
+  async deleteCart(req, res, next) {
+    try {
+      const { userId } = req.params;
+  
+      const cartToDelete = await Cart.findOne({ userId: userId });
+  
+      if (cartToDelete) {
+        const result = await Cart.deleteOne({ _id: cartToDelete._id });
+
+        res.status(200).json({ message: 'Корзина видалена' });
+      } else {
+        // Вернуть ответ, если корзина не найдена
+        res.status(404).json({ message: 'Корзину не знайдено' });
+      }
+    } catch (error) {
+      next(ApiError.internal(error.message));
+    }
+  }
 }
 
 module.exports = new CartController();

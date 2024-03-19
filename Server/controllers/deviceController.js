@@ -105,17 +105,47 @@ class DeviceController {
         try {
             const { id } = req.params;
             const updatedItem = req.body;
-            const device = await Device.findByIdAndUpdate(id, updatedItem, { new: true });
-
+    
+            const device = await Device.findById(id);
             if (!device) {
                 return next(ApiError.internal(`Товар за айді ${id} не знайдено`));
             }
 
-            return res.json(device);
+            if(req.files && req.files.imgs){
+                device.imgs.forEach(image => {
+                    const imagePath = path.join(__dirname, '..', 'static', image);
+                    fs.unlink(imagePath, err => {
+                        if (err) {
+                            console.error(`Не вдалося видалити ${image}: ${err}`);
+                        }
+                    });
+                });
+        
+                let fileNames = [];
+                if (Array.isArray(req.files.imgs)) {
+                    for (let file of req.files.imgs) {
+                        let fileName = uuid.v4() + ".jpg";
+                        file.mv(path.resolve(__dirname, '..', 'static', fileName));
+                        fileNames.push(fileName);
+                    }
+                } else if (typeof req.files.imgs === 'object' && req.files.imgs !== null) {
+                    let file = req.files.imgs;
+                    let fileName = uuid.v4() + ".jpg";
+                    file.mv(path.resolve(__dirname, '..', 'static', fileName));
+                    fileNames.push(fileName);
+                }
+        
+                updatedItem.imgs = fileNames;
+            }
+            
+            const updatedDevice = await Device.findByIdAndUpdate(id, updatedItem, { new: true });
+    
+            return res.json(updatedDevice);
         } catch (error) {
             next(ApiError.internal(error.message));
         }
     }
+    
 }
 
 module.exports = new DeviceController();

@@ -1,23 +1,26 @@
 .acountDropdown{
   width: auto;
-  right: 0.5em;
+  right: 0;
   height: auto;
-  top: 30px;
+  top: 40px;
   padding: 30px 0 0 10px;
-  
 }
+
 .myDropdownContent{
   background-color: #fff;
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  padding: 30px;
+  padding: 20px;
+  cursor: default;
+  font-size: 20px;
   box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 50px 0 rgba(0,0,0,0.4);
 }
 
 .myDropdownContent a {
+  cursor: pointer;
   text-decoration: none;
   color: black;
 }

@@ -16,7 +16,7 @@ const DeviceCard = ({device, onCheckboxChange}) => {
             <div className="deviceCardLeftCol">
               <div className="deviceName"><span className="nowrap">{device.name}</span></div>
               <div className='elementsGrid'>
-                <NavLink to={`update/${device._id}`}><Image src={editIcon} width={20}></Image></NavLink>
+                <NavLink to={`/admin/devices/update/${device._id}`}><Image src={editIcon} width={20}></Image></NavLink>
                 <input type="checkbox" onClick={(e) => e.stopPropagation()} onChange={(e) => onCheckboxChange(device._id, e.target.checked)} />
               </div>
             </div>

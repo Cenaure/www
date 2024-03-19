@@ -1,0 +1,23 @@
+.searchResultsPageContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 20px;
+}
+
+.searchResultsPageContainer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Якщо є тільки один елемент, він займає обидві колонки */
+.searchResultsPageContainer div:only-child {
+  grid-column: span 2;
+}
+
+/* Якщо є три елементи, третій елемент займає обидві колонки */
+.searchResultsPageContainer div:nth-child(3):last-child {
+  grid-column: span 2;
+}

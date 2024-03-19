@@ -28,6 +28,7 @@ const DevicesList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [rowsPerPage, setRowsPerPage] = useState(24)
   const [devicesWithoutPagination, setDevicesWithoutPagination] = useState({info: []})
+
   async function reloadDevices(id, minPrice, maxPrice) {
     setLoading(true);
     let filteredData = id ? device._devices.rows.filter(row => row.typeId === id) : device._devices.rows;
@@ -66,10 +67,9 @@ const DevicesList = () => {
     reloadDevices(id, minPrice, maxPrice)
   }
 
+
   useEffect(() => {
-    const indexOfLastDevice = currentPage * rowsPerPage
-    const indexOfFirstDevice = indexOfLastDevice - rowsPerPage
-    setDevices(device._devices.rows.slice(indexOfFirstDevice, indexOfLastDevice))
+    reloadDevices(id, minPrice, maxPrice)
   }, [currentPage, device._devices, rowsPerPage])
 
   useEffect(() => {
@@ -115,11 +115,11 @@ const DevicesList = () => {
           </div>
         }
         <div className="devicesNav">
-          {showFiltersApply && (
+          {id &&
             <div className='mb-2'>
               <FiltersApply count={selectedAttributes.length} filterProductsByAttributes={filterProductsByAttributes}/>
             </div>
-          )}
+          }
         </div>
         <div className="containerGrid">
           <div className="filtersContainer">
@@ -149,7 +149,7 @@ const DevicesList = () => {
           <div>
             <div className="devicesGrid">
               {!loading && devices.map((device, index) => (
-                <DeviceItem device={device} index={index} userId={user._user.id} basket={basket}/>
+                <DeviceItem device={device} index={index} userId={user._user.id} basket={basket} key={index} user={user}/>
               ))}
             </div>
           </div>

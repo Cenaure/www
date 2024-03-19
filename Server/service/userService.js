@@ -17,7 +17,7 @@ class UserService {
 
     async registration(firstName, secondName, email, password, role) {
         const candidate = await UserModel.findOne({email});
-        if(candidate) throw ApiError.BadRequest(`Користувач з поштою ${email} вже існує`);
+        if(candidate) throw ApiError.badRequest(`Користувач з поштою ${email} вже існує`);
         
         const hashPassword = await bcrypt.hash(password, 3);
         const activationLink = uuid.v4();

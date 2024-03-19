@@ -12,9 +12,9 @@ import { Container, Image } from 'react-bootstrap';
 import { useMediaPredicate } from "react-media-hook";
 import DropdownAcount from './dropdownAcount.jsx';
 import { useNavigate, Link } from 'react-router-dom';
-import cartIcon from '../css/imgs/cart.png'
+import cartIcon from '../assets/icons/cart.svg'
 import SearchElement from './SearchElement.jsx';
-
+import searchIcon from '../assets/icons/search.svg'
 const Navbar = observer(() => {
   const {user, basket} = useContext(Context);
   
@@ -39,6 +39,7 @@ const Navbar = observer(() => {
   };
   
   const lessThan768 = useMediaPredicate("(max-width: 768px)");
+  const lessThan300 = useMediaPredicate("(max-width: 300px)");
   
   const [burgerClass, setBurgerClass] = useState("line unclicked");
   const [menuClass, setMenuClass] = useState("menu hidden");
@@ -61,27 +62,34 @@ const Navbar = observer(() => {
       <header className='mynav'>
         <Container fluid>
           <div className='topNav'>
-            <Link className='navBrand' to='/'>gigix</Link>
+            <Link className='navBrand' to='/'>Інтернет-магазин</Link>
             <nav className={menuClass}>
               <ul className='navbar-links'>
-                <li><a href='#'>Сервіси</a></li>
-                <li><a href='#'>Сервіси</a></li>
-                <li><a href='#'>Сервіси</a></li>
+                <li><a href='#'></a></li>
+                <li><a href='#'></a></li>
+                <li><a href='#'></a></li>
                 {lessThan768 && <li>
                   {user.user.role == "ADMIN" && <button className='myBtn acountBtn' onClick={() => navigate('/admin')}>Панель управління</button>}
                 </li>}
+                {lessThan300 && <li>
+                  {user.isAuth == true && <button className='myBtn acountBtn' onMouseEnter={() => setDropdownAcountOpen(true)} onMouseLeave={() => setDropdownAcountOpen(false)}>Акаунт
+                    {dropdownAcountOpen && <DropdownAcount setDropdownAcountOpen={setDropdownAcountOpen} dropdownAcountOpen={dropdownAcountOpen}/>}
+                  </button>}
+                </li>}
               </ul>
             </nav>
-            {!user.isAuth ? <button onClick={() => (authModalOpen ? authClose() : authOpen())} className='myBtn'><img src={AcIm}/></button> : 
-              <div>
-                <button className='myBtn' onClick={() => basket.setOpen(!basket.isOpen)}><Image src={cartIcon} style={{height: '100%'}}></Image></button>
-                {user.user.role == "ADMIN" && !lessThan768 && <button className='myBtn acountBtn' onClick={() => navigate('/admin')}>Панель управління</button>}
-                <button className='myBtn acountBtn' onMouseEnter={() => setDropdownAcountOpen(true)} onMouseLeave={() => setDropdownAcountOpen(false)}>Акаунт
-                  {dropdownAcountOpen && <DropdownAcount setDropdownAcountOpen={setDropdownAcountOpen}/>}
-                </button>
-              </div>
-            }
-            
+            <div className="rightButtonsContainer">
+              <button className='myBtn' onClick={() => basket.setOpen(!basket.isOpen)}><Image src={cartIcon} style={{height: '100%'}}></Image></button>
+              {!user.isAuth ? <button onClick={() => (authModalOpen ? authClose() : authOpen())} className='myBtn'><img src={AcIm}/></button> : 
+                <div>
+                  {user.user.role == "ADMIN" && !lessThan768 && <button className='myBtn acountBtn' onClick={() => navigate('/admin')}>Панель управління</button>}
+                  {!lessThan300 &&
+                    <button className='myBtn acountBtn' onMouseEnter={() => setDropdownAcountOpen(true)} onMouseLeave={() => setDropdownAcountOpen(false)}>Акаунт
+                      {dropdownAcountOpen && <DropdownAcount setDropdownAcountOpen={setDropdownAcountOpen} dropdownAcountOpen={dropdownAcountOpen}/>}
+                    </button>}
+                </div>
+              }
+            </div>
             {lessThan768 &&
               <div className='burger' onClick={updateMenu}>
                 <div className={burgerClass}></div>
@@ -94,7 +102,7 @@ const Navbar = observer(() => {
               <input type='text' placeholder='Я хочу знайти...' name='q' onChange={e => setSearch(e.target.value)}>
                 
               </input>
-              <button type='submit'>Ш</button>
+              <button onClick={(e) => {e.preventDefault(), navigate(`/search/${search}`), setSearch('')}}><Image src={searchIcon}></Image></button>
             </form>
           </div>
           {!lessThan768 && <SearchElement search={search} setSearch={setSearch}/>}

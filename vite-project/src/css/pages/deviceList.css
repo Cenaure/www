@@ -117,13 +117,21 @@
   width: auto;
 }
 
-@media (max-width: 320px){
+@media (max-width: 600px){
+  .deviceCard {
+    height: clamp(270px, 61vw, 320px);
+  }
   .footer {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
   }
   .footer button {
-    min-width: 27px !important;
-    min-height: 27px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    width: 7vw;
+    height: 7vw;
   }
 }
 .typeName {
@@ -151,6 +159,7 @@
 
 .cardBasketAdd {
   background-color: rgb(37, 221, 67);
+  position: relative;
   background-color: #4ee4aa !important;
 }
 .cardBasketAdd:hover {

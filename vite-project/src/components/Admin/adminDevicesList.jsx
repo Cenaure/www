@@ -89,10 +89,9 @@ const AdminDevicesList = React.forwardRef(({handleCheckboxChange, show}, ref) =>
       <div className="">
         <div className="paginationContainer mt-1">
           <form className='searchField'>
-            <input type='text' placeholder='Я хочу знайти...' name='q' onChange={e => setSearch(e.target.value)}>
+            <input type='text' placeholder='Введіть текст для пошуку' name='q' onChange={e => setSearch(e.target.value)}>
               
             </input>
-            <button type='submit'>Ш</button>
           </form>
           <TablePagination
             component="div"

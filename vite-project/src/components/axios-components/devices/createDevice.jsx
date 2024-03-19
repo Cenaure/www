@@ -4,7 +4,7 @@ import createDeviceAttribute from "./createDeviceAttribute";
 
 const createDevice = async (name, price, imgs, typeId, brandId, description, values) => {
   try {
-    console.log(values)
+    //console.log(values)
     const formData = new FormData();
     formData.append('name', name);
     formData.append('price', price);
@@ -22,9 +22,9 @@ const createDevice = async (name, price, imgs, typeId, brandId, description, val
       },
     });
 
-    Object.values(values).forEach((e) => {
-      createDeviceAttribute(data._id, e._id, e.value)
-    })    
+    for (const e of Object.values(values)) {
+      await createDeviceAttribute(data._id, e._id, e.value)
+    } 
 
     return data
   } catch (error) {

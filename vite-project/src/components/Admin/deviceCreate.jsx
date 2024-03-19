@@ -79,9 +79,9 @@ const DeviceCreate = () => {
     setImgs([...e.target.files])
     setSelectedImage(e.target.files[0])
   };
-
+  
   const handleSubmit = async () => {
-    
+    console.log(values)
     let data = await deviceValidation(name, price, imgs, selectedTypeId, selectedBrandId, description, values, id)
     setErrors(data[0])
     console.log(data[0])
@@ -96,6 +96,7 @@ const DeviceCreate = () => {
     if(id){
       let devices = device._devices.rows;
       let deviceById = devices.find(device => device._id === id);
+      console.log(deviceById)
       setName(deviceById.name)
       setPrice(deviceById.price)
       setDescription(deviceById.description)
@@ -107,6 +108,7 @@ const DeviceCreate = () => {
       setValues(deviceById.attributes)
     }
   }, [id])
+  
   return(
     <>
       <div className="devicesPageNav" style={{justifyContent: "right", padding: '10px'}}>

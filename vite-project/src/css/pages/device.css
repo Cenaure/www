@@ -282,7 +282,7 @@ h2{
   margin-bottom: 10px;
 }
 
-#characteristics::before, #about::before, #description::before, #reviews::before {
+#characteristics, #about, #description, #reviews {
   content: "";
   display: block;
   padding-top: 60px; 

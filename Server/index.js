@@ -7,20 +7,39 @@ const router = require('./routes/index');
 const cookieParser = require('cookie-parser')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware');
 const path = require('path')
+const http = require('http');
 
 const { PORT, DB_URL } = process.env;
 
 const app = express();
+const server = http.createServer(app);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['my-custom-header'],
+    credentials: true
+  }
+});
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
 
 const corsOptions ={
   origin:'http://localhost:5173', 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
+
+app.set('io', io);
+
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());  
-
 
 app.use(cookieParser())
 
@@ -40,7 +59,7 @@ const start = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    app.listen(PORT, () =>
+    server.listen(PORT, () =>
       console.log(`Server started on PORT = ${PORT}`)
     );
   } catch (error) {

@@ -7,7 +7,7 @@ const instance = axios.create({
 
 const checkPost = async () => {
   try {
-    const res =  await instance.get(`${API_URL}/user/refresh`);
+    const res = await instance.get(`${API_URL}/user/refresh`);
     localStorage.setItem('accessToken', res.data.accessToken);
     return res;
   } catch (e) {

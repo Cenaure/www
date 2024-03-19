@@ -4,12 +4,11 @@ const Type = require('../models/type-model');
 
 class AttributeDeviceController {
   async createAttribute(req, res, next) {
-    const { deviceId, attributeId } = req.params;
-    const { value } = req.body;
     try {
+      const { deviceId, attributeId } = req.params;
+      const { value } = req.body;
 
       const device = await Device.findById(deviceId);
-
       if (!device) {
         next(ApiError.badRequest('Пристрій не знайдено'));
       }

@@ -4,7 +4,9 @@ import getCart from "../components/axios-components/cart/getCart";
 export default class basketStore {
   constructor(){
     this._isOpen = false;
-    this._cart = {};
+    this._cart = {
+
+    };
     makeAutoObservable(this);
   }
 

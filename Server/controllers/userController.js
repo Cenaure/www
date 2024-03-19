@@ -8,16 +8,17 @@ class UserController{
             const {firstName, secondName, email, password} = req.body;
 
             if(!email || !password){
-                return next(ApiError.BadRequest('Не вказаний email або пароль'));
+                return next(ApiError.badRequest('Не вказаний email або пароль'));
             }
 
             const errors = validationResult(req);
             if(!errors.isEmpty()){
-                return next(ApiError.BadRequest('Помилка при валідації', errors.array()));
+                return next(ApiError.badRequest('Помилка при валідації', errors.array()));
             }
 
             const userData = await userService.registration(firstName, secondName, email, password);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30*24*60*60*100, httpOnly: true});
+            
             return res.json(userData);
         } catch (error) {
             next(error);

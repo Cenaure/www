@@ -4,7 +4,6 @@ import changeDeviceAttribute from "./changeDeviceAttribute";
 
 const updateDevice = async (name, price, imgs, typeId, brandId, description, values, id) => {
   try {
-    console.log(2)
     const formData = new FormData();
     formData.append('name', name);
     formData.append('price', price);
@@ -23,7 +22,6 @@ const updateDevice = async (name, price, imgs, typeId, brandId, description, val
     });
 
     for (const e of Object.values(values)) {
-      console.log(data._id, e._id, e.value)
       await changeDeviceAttribute(data._id, e._id, e.value);
     }    
 

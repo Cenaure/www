@@ -11,7 +11,7 @@ const AdminTypesList = ({types, handleCheckboxChange}) => {
   const [typesFiltered, setTypesFiltered] = useState({info: []})
   const [search, setSearch] = useState('');
   const items = [...types];
-  const filteredItems = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+  const [filteredItems, setFilteredItems] = useState(items.filter(item => item.name.toLowerCase().includes(search.toLowerCase())));
   const [currentPage, setCurrentPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
@@ -23,6 +23,9 @@ const AdminTypesList = ({types, handleCheckboxChange}) => {
     setLoading(false)
   }, [types, filteredItems]) 
 
+  useEffect(() => {
+    setFilteredItems(items.filter(item => item.name.toLowerCase().includes(search.toLowerCase())))
+  }, [search])
   const handleChangePage = (event, newPage) => {
     setCurrentPage(newPage)
   }
@@ -36,10 +39,9 @@ const AdminTypesList = ({types, handleCheckboxChange}) => {
     <div className='p-2'>
       <div className="paginationContainer mt-1">
         <form className='searchField'>
-          <input type='text' placeholder='Я хочу знайти...' name='q' onChange={e => setSearch(e.target.value)}>
-            
+          <input type='text' placeholder='Введіть текст для пошуку' name='q' onChange={e => setSearch(e.target.value)}>
+              
           </input>
-          <button type='submit'>Ш</button>
         </form>
         <TablePagination
           component="div"

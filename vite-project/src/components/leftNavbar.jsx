@@ -6,11 +6,34 @@ import {useState} from 'react';
 import { Col, Row, Nav } from 'react-bootstrap';
 import {motion} from "framer-motion";
 import { useMediaPredicate } from "react-media-hook";
+import { Context } from '../main';
+import { useNavigate } from 'react-router-dom';
 
 const LeftNav = observer(() => {
   const lessThan768 = useMediaPredicate("(max-width: 767px)");
   const [open, setOpen] = useState(false);
   const [checker, setChecker] = useState("");
+  const {type} = useContext(Context)
+  const navigate = useNavigate()
+
+  return(
+    <div className="leftNav">
+      <Row className='pt-3 leftRow'> 
+        <Col md={{span: 12}} sm={{span: 3}} xs={{span: 6}} className='pt-1'>
+          <button className='listBtn' onClick={() => navigate(`/devices`)}>
+            Каталог
+          </button>
+        </Col>
+        {type._types.map((type, index) => (
+          <Col md={{span: 12}} sm={{span: 3}} xs={{span: 6}} className='pt-1' key={index}>
+            <button className='listBtn' onClick={() => navigate(`/devices/type/${type._id}`)}>
+              {type.name}
+            </button>
+          </Col>
+        ))}
+      </Row>
+    </div>
+  )
 
   return (
     <div className='leftNav'>

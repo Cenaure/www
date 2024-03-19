@@ -1,0 +1,126 @@
+.orderCard{
+  display: flex;
+  padding: 20px;
+  height: auto;
+  margin: 20px;
+  flex-direction: row;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.orderContent{
+  display: flex;
+  flex-direction: column;
+}
+
+.orderContentItem {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.orderItemTitle{
+  color: rgb(87, 87, 87);
+}
+
+.orderItemValue{
+  font-weight: bold;
+  float: right;
+}
+
+.orderHeader{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.orderCard{
+  justify-content: space-between;
+}
+
+.orderModalHeader{
+  font-size: 18px;
+}
+
+.orderModal{
+  padding: 15px !important;
+}
+
+.orderModalContent{
+  border-top: 3px rgb(56, 54, 65) solid;
+  border-bottom: 3px rgb(56, 54, 65) solid;
+  border-radius: 10px;
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px;
+}
+
+.orderModalItemTitle{
+  text-wrap: nowrap;
+  color: rgb(202, 202, 202);
+}
+
+.orderModalMainInfoList h5{
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.orderModalMainInfoList{
+  gap: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+}
+
+.orderModalDeviceCardContainer{
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.count {
+  font-size: 30px;
+}
+
+.orderModalDeviceCard{
+  width: 90%;
+}
+
+.orderModalDevicesList {
+  height: auto;
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+  border-radius: 30px;
+}
+
+.orderItemValueInput{
+  background-color: transparent;
+  color: white;
+  width: 100%;
+  border: 0;
+  user-select: auto;
+  text-align: right;
+  height: 25px;
+}
+
+.orderItemValueInput option {
+  color: white;
+  background-color: black;
+  border: 0;
+}
+
+.orderModalContentItem{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.orderModalFooter{
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}

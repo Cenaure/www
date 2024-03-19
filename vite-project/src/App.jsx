@@ -20,15 +20,17 @@ const App = observer(() => {
   useEffect(() => {
     if(localStorage.getItem('token')) {
       checkPost().then((res) => {
+        
         user.setUser(res.data.user);
         user.setIsAuth(true);
+        basket.updateBasket(res.data.user.id).then(() => setLoadingCart(false))
       }).finally(() => {
         setLoading(false)
-        basket.updateBasket(user._user.id).then(() => setLoadingCart(false))
       })
     }
     else{
       setLoading(false)
+      setLoadingCart(false)
     }
     device.updateDevices().then(() => setLoadingDevices(false))
     type.updateTypes().then(() => setLoadingTypes(false))
